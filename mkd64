@@ -1,0 +1,83 @@
+#!/usr/bin/env perl
+
+use strict;
+
+main();
+
+sub main {
+    if (scalar(@ARGV) != 3) {
+        usage();
+        exit(1);
+    }
+
+    my ($image, $name, $listfile) = @ARGV;
+
+    unless (process($image, $name, $listfile)) {
+        unlink($image);
+        exit(1);
+    }
+
+    exit(0);
+}
+
+sub process {
+    my ($image, $name, $listfile) = @_;
+
+    my $type = "\L$image";
+    $type =~ s/.*\.//;
+
+    my $fh;
+
+    unless (open($fh, '<', $listfile)) {
+        error("can't open list file '$listfile': $!");
+        return undef;
+    }
+
+    unless (checked_system('c1541', '-silent', '-format', $name, $type, $image)) {
+        return undef;
+    }
+
+    while (my $line = <$fh>) {
+        chomp $line;
+        my ($name, $file);
+
+        if ($line =~ m/(.*)\t(.*)/) {
+            ($file, $name) = ($1, $2);
+        }
+        else {
+            $file = $line;
+            $name = $file;
+            $name =~ s/\.prg$//;
+        }
+
+        unless (checked_system('c1541', $image, '-silent', '-write', $file, $name)) {
+            return undef;
+        }
+    }
+
+    return 1;
+}
+
+sub usage {
+    print STDERR "usage: $0 file.d64 'name,id' list-file\n";
+}
+
+sub error {
+    my ($message) = @_;
+
+    print STDERR "$0: $message\n";
+}
+
+sub warning {
+    my ($message) = @_;
+
+    print STDERR "$0: warning: $message\n";
+}
+
+sub checked_system {
+    unless (system(@_) == 0) {
+        error("can't execute '$_[0]': $?");
+        return undef;
+    }
+    return 1;
+}

@@ -140,7 +140,7 @@ ramlink_restore:
 	rts
 
 increase_address:
-	clc
+	cic
 	lda address
 	adc buffer_length
 	sta address

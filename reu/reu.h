@@ -12,6 +12,8 @@
 #define REU_COMMAND_SWAP 0x2
 #define REU_COMMAND_VERIFY 0x3
 
+#define REU_COMMAND_DEFAULT (REU_COMMAND_EXECUTE | REU_COMMAND_AUTOLOAD | REU_COMMAND_FF00)
+
 struct reu_registers {
 	unsigned char status;
 	unsigned char command;
@@ -27,6 +29,5 @@ struct reu_registers {
 
 void reu_copy(unsigned long reu_address, void *c64_address, unsigned int length, unsigned char mode);
 unsigned int reu_detect(void);
-/* void reu_execute(unsigend char command); */
 
 #endif /* HAD_REU_H */

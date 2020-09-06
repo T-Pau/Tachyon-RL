@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ramlink.h"
-#include "reu.h"
+#include "ramlink/ramlink.h"
+#include "reu/reu.h"
 
 #define BUFFER_SIZE (16*1024)
 

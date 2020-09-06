@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "reu.h"
+#include "reu/reu.h"
 
 int main(void) {
 	unsigned int banks;
@@ -20,5 +19,5 @@ int main(void) {
 		printf("%dmb reu detected.\n", banks / 16);
 	}
 
-	exit(0);
+	return 0;
 }

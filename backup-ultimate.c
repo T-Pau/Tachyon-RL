@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ramlink.h"
-#include "ultimate-dos.h"
+#include "ramlink/ramlink.h"
+#include "ultimate/dos.h"
 
 #define BUFFER_SIZE (16*1024)
 
@@ -18,7 +18,7 @@ int main(void) {
 		printf("no ramlink found.\n");
 		return 0;
 	}
-	if (ultimate_dos_identify(buffer, sizeof(buffer)) == 0) {
+	if (ultimate_dos_identify(1, buffer, sizeof(buffer)) == 0) {
 		printf("no ultimate command interface.\n");
 		return 0;
 	}

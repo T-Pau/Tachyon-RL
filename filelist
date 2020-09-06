@@ -1,2 +1,5 @@
-backup.prg	backup
+backup-ultimate.prg	backup ultimate
+backup-reu.prg	backup reu
+detect-ramlink.prg	detect ramlink
 detect-reu.prg	detect reu
+detect-ultimate.prg	detect ultimate

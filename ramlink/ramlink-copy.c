@@ -1,11 +1,5 @@
 #include "ramlink.h"
 
-unsigned char ramlink_detect(void) {
-	if (*(unsigned char *)0xe0a9 == 0x78) {
-		return 1;
-	}
-	return 0;
-}
 
 void ramlink_reu_copy(unsigned long reu_address, void *c64_address, unsigned int length, unsigned char mode) {
 	ramlink_reu_enable();

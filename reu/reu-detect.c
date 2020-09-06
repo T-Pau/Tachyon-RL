@@ -1,17 +1,5 @@
 #include "reu.h"
 
-#include <stdio.h>
-
-#define CMD (REU_COMMAND_EXECUTE | REU_COMMAND_AUTOLOAD | REU_COMMAND_FF00)
-
-void reu_copy(unsigned long reu_address, void *c64_address, unsigned int length, unsigned char mode) {
-	REU.c64_address = (unsigned int)c64_address;
-	REU.reu_address = reu_address & 0xffff;
-	REU.reu_bank = reu_address >> 16;
-	REU.length = length;
-	REU.command = CMD | mode;
-}
-
 unsigned int reu_detect(void) {
 	static unsigned char backup[256];
 	unsigned char buffer[1];
@@ -26,7 +14,7 @@ unsigned int reu_detect(void) {
 	bank = 0;
 	do {
 		REU.c64_address = (unsigned int)(backup + bank);
-		REU.command = CMD | REU_COMMAND_REU_TO_C64;
+		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_REU_TO_C64;
 		++bank;
 	} while (bank != 0);
 
@@ -36,7 +24,7 @@ unsigned int reu_detect(void) {
 	do {
 		buffer[0] = bank;
 		REU.reu_bank = bank;
-		REU.command = CMD | REU_COMMAND_C64_TO_REU;
+		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_C64_TO_REU;
 		++bank;
 	} while (bank != 0);
 
@@ -45,7 +33,7 @@ unsigned int reu_detect(void) {
 	bank = 0;
 	do {
 		REU.reu_bank = bank;
-		REU.command = CMD | REU_COMMAND_REU_TO_C64;
+		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_REU_TO_C64;
 		//printf("bank %02x read %02x\n", bank, buffer[0]);
 		if (bank == 0) {
 			value = buffer[0];
@@ -62,7 +50,7 @@ unsigned int reu_detect(void) {
 	bank = 0;
 	do {
 		REU.c64_address = (unsigned int)(backup + bank);
-		REU.command = CMD | REU_COMMAND_C64_TO_REU;
+		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_C64_TO_REU;
 		++bank;
 	} while (bank != 0);
 

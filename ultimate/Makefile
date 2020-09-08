@@ -7,7 +7,7 @@ SOURCES=\
 	ci-execute.c \
 	ci-read.c \
 	ci-status.c \
-	ci-write.c \
+	ci-write.s \
 	ci-write-string.c \
 	dos-buffer.c \
 	dos-change-dir.c \
@@ -28,6 +28,9 @@ SOURCES=\
 	dos-rename-file.c \
 	dos-write-data.c
 
+TMP=${SOURCES:.c=.o}
+OBJECTS = ${TMP:.s=.o}
+
 all: ${LIB}
 
 .SUFFIXES: .c .s .o
@@ -38,5 +41,8 @@ all: ${LIB}
 .s.o:
 	cl65 -t c64 -c -g -o $@ $<
 
-${LIB}: ${SOURCES:.c=.o}
-	ar65 r ${LIB} ${SOURCES:.c=.o}
+${LIB}: ${OBJECTS}
+	ar65 r ${LIB} ${OBJECTS}
+
+foo:
+	echo ${OBJECTS}

@@ -29,6 +29,8 @@ int main(void) {
     }
     printf("Current directory: %s\n", string);
 
+    ultimate_dos_delete_file(1, "test.dat");
+
 	timer_start();
     if ((i=ultimate_dos_open_file(1, "test.dat", mode)) != 0) {
         printf("can't open file: %u - %s\n", i, ultimate_ci_status);
@@ -36,7 +38,7 @@ int main(void) {
     }
     printf("open_file status: %s\n", ultimate_ci_status);
 
-    for (i = 0; i < 4 /*32*/; ++i) {
+    for (i = 0; i < 32; ++i) {
         if (ultimate_dos_write_data(1, block, 512) != 0) {
             printf("can't write data: %s\n", ultimate_ci_status);
             return 1;

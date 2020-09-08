@@ -5,7 +5,7 @@ unsigned char ultimate_ci_execute(void) {
     ULTIMATE_CI.control = ULTIMATE_CI_PUSH_CMD;
 
     /* wait for command to finish */
-    while (ULTIMATE_CI.control & ULTIMATE_CI_CMD_BUSY) {
+    while ((ULTIMATE_CI.control & ULTIMATE_CI_STATE_MASK) == ULTIMATE_CI_STATE_BUSY) {
         ;
     }
 
@@ -20,5 +20,6 @@ unsigned char ultimate_ci_execute(void) {
     if (ultimate_ci_status_length < 2) {
         return 0;
     }
-    return (ultimate_ci_status[0] - '0') * 10 + (ultimate_ci_status[1] - '0');
+    ultimate_ci_status_code = (ultimate_ci_status[0] - '0') * 10 + (ultimate_ci_status[1] - '0');
+    return ultimate_ci_status_code;
 }

@@ -1,13 +1,12 @@
-#include "dos.h"
+#include "dos-internal.h"
 
 #include "ci.h"
 
-unsigned char ultimate_dos_read_data(unsigned char instance, unsigned char *buffer, unsigned int length) {
-    ultimate_dos_cmd[0] = instance;
-    ultimate_dos_cmd[1] = ULTIMATE_DOS_CMD_READ_DATA;
-    ultimate_dos_cmd[2] = length & 0xff;
-    ultimate_dos_cmd[3] = length << 8;
-    ultimate_ci_write(ultimate_dos_cmd, 4);
+unsigned int ultimate_dos_read_data(unsigned char instance, unsigned char *buffer, unsigned int length) {
+    ULTIMATE_CI.command = instance;
+    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_READ_DATA;
+    ULTIMATE_CI.command = length & 0xff;
+    ULTIMATE_CI.command = length >> 8;
     if (ultimate_ci_execute() != 0) {
         return 0;
     }

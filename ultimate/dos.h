@@ -1,28 +1,109 @@
 #ifndef HAD_ULTIMATE_DOS_H
 #define HAD_ULTIMATE_DOS_H
 
-#define ULTIMATE_DOS_CMD_IDENTIFY 0x01
-#define ULTIMATE_DOS_CMD_OPEN_FILE 0x02
-#define ULTIMATE_DOS_CMD_CLOSE_FILE 0x03
-#define ULTIMATE_DOS_CMD_READ_DATA 0x04
-#define ULTIMATE_DOS_CMD_WRITE_DATA 0x05
-#define ULTIMATE_DOS_CMD_FILE_SEEK 0x06
-#define ULTIMATE_DOS_CMD_FILE_INFO 0x07
-#define ULTIMATE_DOS_CMD_CHANGE_DIR 0x11
-#define ULTIMATE_DOS_CMD_GET_PATH 0x12
-#define ULTIMATE_DOS_CMD_OPEN_DIR 0x13
-#define ULTIMATE_DOS_CMD_READ_DIR 0x14
-#define ULTIMATE_DOS_CMD_COPY_UI_PATH 0x15
-#define ULTIMATE_DOS_CMD_LOAD_REU 0x21
-#define ULTIMATE_DOS_CMD_SAVE_REU 0x22
-#define ULTIMATE_DOS_CMD_ECHO 0xF0
+#define ULTIMATE_DOS_OPEN_READ 0x01
+#define ULTIMATE_DOS_OPEN_WRITE 0x02
+#define ULTIMATE_DOS_OPEN_CREATE_NEW 0x04
+#define ULTIMATE_DOS_OPEN_CREATE_ALWAYS 0x08
 
-extern unsigned char ultimate_dos_cmd[];
+#define ULTIMATE_DOS_STATUS_OK 0
+#define ULTIMATE_DOS_SATTUS_DIRECTORY_EMPTY 1
+#define ULTIMATE_DOS_SATTUS_REQUEST_TRUNCATED 2
+#define ULTIMATE_DOS_SATTUS_NO_SUCH_DIRECTORY 83
+#define ULTIMATE_DOS_SATTUS_NO_FILE_TO_CLOSE 84
+#define ULTIMATE_DOS_SATTUS_NO_FILE_OPEN 85
+#define ULTIMATE_DOS_SATTUS_CANNOT_READ_DIRECTORY 86
 
+struct ultimate_dos_file_info {
+    unsigned long size;
+    unsigned int date;
+    unsigned int time;
+    unsigned char extension[3];
+    unsigned char attributes;
+    unsigned char filename[1];
+};
+typedef struct ultimate_dos_file_info ultimate_dos_file_info_t;
+
+/*
+    TODO: missing commands:
+    - unsigend char ultimate_dos_open_dir(unsigned char instance);
+    - XXX ultimate_dos_read_dir(unsigned char instance);
+    - XXX ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length);
+    - XXX ultimate_dos_save_reu(unsigned char instance, unsigned long address, unsigned long length);
+*/
+
+
+/*
+  Change to directory.
+  Returns status.
+*/
+unsigned char ultimate_dos_change_dir(unsigned char instance, const unsigned char *name);
+
+/*
+  Closes currently open file.
+  Returns status.
+*/
 unsigned char ultimate_dos_close_file(unsigned char instance);
-unsigned int ultimate_dos_identify(unsigned char instance, unsigned char *buffer, unsigned int length);
+
+unsigned char ultimate_dos_copy_file(unsigned char instance, const unsigned char *old_name, const unsigned char *new_name);
+
+/*
+  Change to home directory.
+  Returns current directory, NULL on error.
+*/
+const unsigned char *ultimate_dos_copy_home_path(unsigned char instance);
+
+/*
+  Change to directory currently selected in UI.
+  This function is deprecated.
+  Returns current directory, NULL on error.
+*/
+const unsigned char *ultimate_dos_copy_ui_path(unsigned char instance);
+
+unsigned char ultimate_dos_create_dir(unsigned char instance, const unsigned char *name);
+
+unsigned char ultimate_dos_delete_file(unsigned char instance, const unsigned char *name);
+
+const ultimate_dos_file_info_t *ultimate_dos_file_info(unsigned char instance);
+
+const ultimate_dos_file_info_t *ultimate_dos_file_stat(unsigned char instance, const unsigned char *filename);
+
+/*
+  Seeks currently open file to position.
+  Returns status.
+*/
+unsigned char ultimate_dos_file_seek(unsigned char instance, unsigned long position);
+
+/*
+  Get current directory.
+  Returns current directory, NULL on error.
+*/
+const unsigned char *ultimate_dos_get_path(unsigned char instance);
+
+/*
+  Get DOS identification string.
+  Returns NUL-terminated string, NULL if DOS target is not present.
+*/
+const unsigned char *ultimate_dos_identify(unsigned char instance);
+
+/*
+  Opens file. See ULTIMATE_DOS_OPEN_* for mode bits.
+  Returns status.
+*/
 unsigned char ultimate_dos_open_file(unsigned char instance, const unsigned char *name, unsigned char mode);
-unsigned char ultimate_dos_read_data(unsigned char instance, unsigned char *buffer, unsigned int length);
+
+/*
+  Read data from open file into buffer.
+  Returs the number of bytes read.
+*/
+unsigned int ultimate_dos_read_data(unsigned char instance, unsigned char *buffer, unsigned int length);
+
+unsigned char ultimate_dos_rename_file(unsigned char instance, const unsigned char *old_name, const unsigned char *new_name);
+
+/*
+  Writes data from buffer into open file.
+  Returns status.
+*/
 unsigned char ultimate_dos_write_data(unsigned char instance, const unsigned char *buffer, unsigned int length);
 
 #endif /* HAD_ULTIMATE_DOS_H */

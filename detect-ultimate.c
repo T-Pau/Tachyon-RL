@@ -4,17 +4,19 @@
 #include "ultimate/ci.h"
 
 int main(void) {
-    unsigned char buffer[256];
+    const unsigned char *identifier;
+
 	printf("%c", 0x8E);
 
     if (ultimate_ci_detect() ==0) {
         printf("no ultiamte command line interface.\n");
     }
-    else if (ultimate_dos_identify(1, buffer, sizeof(buffer)) == 0) {
+    else if ((identifier = ultimate_dos_identify(1)) == NULL) {
         printf("ultimate dos interface not found.\n");
     }
     else {
-        printf("%s\n", buffer);
+        puts(identifier);
+        putchar('\n');
     }
 
     return 0;

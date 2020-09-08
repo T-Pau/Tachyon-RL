@@ -25,6 +25,7 @@ struct ultimate_ci_registers {
 
 #define ULTIMATE_CI (*(struct ultimate_ci_registers *)0xdf1c)
 
+extern unsigned char ultimate_ci_status_code;
 extern unsigned char ultimate_ci_status[];
 extern unsigned char ultimate_ci_status_length;
 
@@ -57,5 +58,15 @@ unsigned int ultimate_ci_read(unsigned char *data, unsigned int length);
   Write command data.
 */  
 void ultimate_ci_write(const unsigned char *data, unsigned int length);
+
+/*
+  Write NUL-terminated string to command data, converting to ASCII.
+*/  
+void ultimate_ci_write_string(const unsigned char *data);
+
+/*
+  Convert from ASCII to PETSCII.
+*/
+void ultimate_ci_ascii2pet(unsigned char *s, unsigned int len);
 
 #endif /* HAD_ULTIMATE_CI_H */

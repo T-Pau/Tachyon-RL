@@ -1,10 +1,13 @@
+SUBDIRS = ramlink reu ultimate
+
 DISK=ramlink-backup.d64
 PROGRAMS=\
 	backup-reu.prg \
 	backup-ultimate.prg \
 	detect-ramlink.prg \
 	detect-reu.prg \
-	detect-ultimate.prg
+	detect-ultimate.prg \
+	write-test.prg
 
 all: ${DISK}
 
@@ -33,3 +36,6 @@ detect-reu.prg: detect-reu.o reu/reu.lib
 
 detect-ultimate.prg: detect-ultimate.o ultimate/ultimate.lib
 	cl65 -t c64 -o detect-ultimate.prg detect-ultimate.o ultimate/ultimate.lib
+
+write-test.prg: write-test.o ultimate/ultimate.lib
+	cl65 -t c64 -o write-test.prg write-test.o ultimate/ultimate.lib

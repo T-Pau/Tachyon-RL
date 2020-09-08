@@ -12,6 +12,9 @@ unsigned int ultimate_ci_read(unsigned char *data, unsigned int length) {
             }
         }
         ULTIMATE_CI.control = ULTIMATE_CI_DATA_ACC;
+        while ((ULTIMATE_CI.control & ULTIMATE_CI_STATE_MASK) == ULTIMATE_CI_STATE_BUSY) {
+            ;
+        }
     }
 
     return i;

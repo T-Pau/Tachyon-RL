@@ -24,7 +24,7 @@ struct ramlink_block_registers {
 
 #define ramlink_reu_enable() (asm("jsr $e0a9"))
 #define ramlink_reu_execute_and_disable() (asm("jsr $fe1e"))
-#define ramlink_reu_execute_block() (asm("jsr $fe90"))
+#define ramlink_reu_execute_block() (asm("jsr $fe09"))
 #define ramlink_reu_disable() (asm("jsr $fe0c"))
 
 #define RAMLINK_REU (*(struct reu_registers *)0xde00)

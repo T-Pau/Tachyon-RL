@@ -25,8 +25,8 @@ ${DISK}: ${PROGRAMS} mkd64 filelist
 backup-reu.prg: backup-reu.o ramlink/ramlink.lib reu/reu.lib
 	cl65 -t c64 -o backup-reu.prg backup-reu.o ramlink/ramlink.lib reu/reu.lib
 
-backup-ultimate.prg: backup-ultimate.o ramlink/ramlink.lib ultimate/ultimate.lib
-	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o ramlink/ramlink.lib ultimate/ultimate.lib
+backup-ultimate.prg: backup-ultimate.o timer-cia.o ramlink/ramlink.lib ultimate/ultimate.lib
+	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o timer-cia.o ramlink/ramlink.lib ultimate/ultimate.lib
 
 detect-ramlink.prg: detect-ramlink.o ramlink/ramlink.lib
 	cl65 -t c64 -o detect-ramlink.prg detect-ramlink.o ramlink/ramlink.lib

@@ -5,6 +5,8 @@
 #include "ultimate/ci.h"
 #include "ultimate/dos.h"
 
+#include "timer.h"
+
 #define BUFFER_SIZE (16*1024)
 
 unsigned char buffer[BUFFER_SIZE];
@@ -16,18 +18,23 @@ char filename[256];
 
 int main(void) {
 	const char *string;
-	unsigned int size;
+	unsigned long size;
 
 	/* printf("%c", 0x8E); */
 
-	if (ramlink_detect() == 0) {
-		printf("No RAMLink found.\n");
+	printf("Detecting RAMLink: ");
+	if ((size = ramlink_get_size()) == 0) {
+		printf("not found.\n");
 		return 0;
 	}
+	printf("%lu bytes\n", size);
+
+	printf("Detecting Ultimate DOS: ");
 	if ((string = ultimate_dos_identify(1)) == NULL) {
-		printf("Ultimate II command interface not\navailable.\n");
+		printf("not found\n");
 		return 0;
 	}
+	printf("%s\n", string);
 
 	string = ultimate_dos_copy_home_path(1);
 	printf("Current directory:\n  %s\n", string);
@@ -35,14 +42,16 @@ int main(void) {
 	printf("Filename: ");
 	fgets(filename, 256, stdin);
 	filename[strlen(filename)-1] = '\0';
-	printf("RAMLink size (in mb): ");
-	scanf("%d", &size);
-	getchar(); /* eat newline */
 
-	if (backup(1024*1024*(unsigned long)size, filename) == 0) {
-		puts("backup done.\n");
+	timer_start();
+	if (backup(size, filename) == 0) {
+		timer_stop();
+		puts("backup done in\n");
+		timer_output();
+		puts("\n");
 	}
 	else {
+		timer_stop();
 		puts("backup failed.\n");
 	}
 	return 0;

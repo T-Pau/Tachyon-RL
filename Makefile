@@ -37,5 +37,5 @@ detect-reu.prg: detect-reu.o reu/reu.lib
 detect-ultimate.prg: detect-ultimate.o ultimate/ultimate.lib
 	cl65 -t c64 -o detect-ultimate.prg detect-ultimate.o ultimate/ultimate.lib
 
-write-test.prg: write-test.o ultimate/ultimate.lib
-	cl65 -t c64 -o write-test.prg write-test.o ultimate/ultimate.lib
+write-test.prg: write-test.o timer-cia.o ultimate/ultimate.lib
+	cl65 -t c64 -o write-test.prg write-test.o timer-cia.o ultimate/ultimate.lib

@@ -30,7 +30,7 @@ int main(void) {
 	}
 
 	string = ultimate_dos_copy_home_path(1);
-	printf("Current path:\n  %s\n", identifier);
+	printf("Current directory:\n  %s\n", string);
 
 	printf("Filename: ");
 	fgets(filename, 256, stdin);
@@ -69,6 +69,6 @@ static unsigned char backup(unsigned long size, const char *filename) {
 	printf("%ccopied %3u\n", 19, (unsigned int)(address>>16));
 
 	ultimate_dos_close_file(1);
-	
+
 	return 0;
 }

@@ -2,7 +2,9 @@ LIB=ramlink.lib
 
 SOURCES=\
 	ramlink-copy.c \
-	ramlink-detect.c
+	ramlink-copy-block.c \
+	ramlink-detect.c \
+	ramlink-get-size.c
 
 all: ${LIB}
 

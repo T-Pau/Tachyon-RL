@@ -2,12 +2,14 @@ SUBDIRS = ramlink reu ultimate
 
 DISK=ramlink-backup.d64
 PROGRAMS=\
-	backup-reu.prg \
 	backup-ultimate.prg \
-	detect-ramlink.prg \
-	detect-reu.prg \
-	detect-ultimate.prg \
+	restore-ultimate.prg \
 	write-test.prg
+
+LIBS = \
+	ramlink/ramlink.lib \
+	reu/reu.lib \
+	ultimate/ultimate.lib
 
 all: ${DISK}
 
@@ -22,20 +24,11 @@ ${DISK}: ${PROGRAMS} mkd64 filelist
 .s.o:
 	cl65 -t c64 -c -g -o $@ $<
 
-backup-reu.prg: backup-reu.o ramlink/ramlink.lib reu/reu.lib
-	cl65 -t c64 -o backup-reu.prg backup-reu.o ramlink/ramlink.lib reu/reu.lib
+backup-ultimate.prg: backup-ultimate.o timer-cia.o ${LIBS}
+	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o timer-cia.o ${LIBS}
 
-backup-ultimate.prg: backup-ultimate.o timer-cia.o ramlink/ramlink.lib ultimate/ultimate.lib
-	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o timer-cia.o ramlink/ramlink.lib ultimate/ultimate.lib
+restore-ultimate.prg: restore-ultimate.o timer-cia.o ${LIBS}
+	cl65 -t c64 -o restore-ultimate.prg restore-ultimate.o timer-cia.o ${LIBS}
 
-detect-ramlink.prg: detect-ramlink.o ramlink/ramlink.lib
-	cl65 -t c64 -o detect-ramlink.prg detect-ramlink.o ramlink/ramlink.lib
-
-detect-reu.prg: detect-reu.o reu/reu.lib
-	cl65 -t c64 -o detect-reu.prg detect-reu.o reu/reu.lib
-
-detect-ultimate.prg: detect-ultimate.o ultimate/ultimate.lib
-	cl65 -t c64 -o detect-ultimate.prg detect-ultimate.o ultimate/ultimate.lib
-
-write-test.prg: write-test.o timer-cia.o ultimate/ultimate.lib
-	cl65 -t c64 -o write-test.prg write-test.o timer-cia.o ultimate/ultimate.lib
+write-test.prg: write-test.o timer-cia.o ${LIBS}
+	cl65 -t c64 -o write-test.prg write-test.o timer-cia.o ${LIBS}

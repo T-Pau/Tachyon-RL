@@ -16,8 +16,8 @@
 
 unsigned char buffer[BUFFER_SIZE];
 
-static unsigned char backup(unsigned long size, const char *filename);
-static unsigned char backup_reu(unsigned long size, const char *filename);
+static unsigned char restore(unsigned long size, const char *filename);
+static unsigned char restore_reu(unsigned long size, const char *filename);
 
 char filename[256];
 
@@ -27,7 +27,10 @@ int main(void) {
 	unsigned long reu_size;
 	unsigned ret;
 
-	printf("%cBacking up RAMLink\n\n", 147);
+	printf("%cRestore RAMLink\n\n", 147);
+	printf("THIS WILL DELETE ALL DATA ON RAMLINK!\n\n");
+
+	/* TODO: ask for confirmation */
 
 	printf("Detecting RAMLink: ");
 	if ((size = ramlink_get_size()) == 0) {
@@ -58,47 +61,50 @@ int main(void) {
 
 	timer_start();
  	if (reu_size >= size) {
- 		ret = backup_reu(size, filename);
+ 		ret = restore_reu(size, filename);
  	}
  	else {
-		ret = backup(size, filename);
+		ret = restore(size, filename);
 	}
 	timer_stop();
 
 	if (ret == 0) {
-		puts("backup done in ");
+		puts("restore done in ");
 		timer_output();
 		puts("\n");
 	}
 	else {
-		puts("backup failed.\n");
+		puts("restore failed.\n");
 	}
 	return 0;
 }
 
-static unsigned char backup(unsigned long size, const char *filename) {
+static unsigned char restore(unsigned long size, const char *filename) {
 	unsigned long address;
 
 #if ENABLE_DOS
-	if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_ALWAYS|ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
+	if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_READ) != 0) {
 		printf("can't open '%s':\n  %s\n", filename, ultimate_ci_status);
 		return 1;
 	}
+
+	/* TODO: check file size */
 #endif
+
 
 	printf("%cCopied   0 of %3u\n", 147, (unsigned int)(size >> 16));
 	for (address = 0; address < size; address += BUFFER_SIZE) {
 		printf("%cCopied %3u", 19, (unsigned int)(address>>16));
-#if ENABLE_RAMLINK
-		ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
-#endif
 #if ENABLE_DOS
-		if (ultimate_dos_write_data(1, buffer, BUFFER_SIZE) != 0) {
+		if (ultimate_dos_read_data(1, buffer, BUFFER_SIZE) != 0) {
 			printf("\ncan't write to '%s':\n  %s\n", filename, ultimate_ci_status);
 			ultimate_dos_close_file(1);
 			return 1;
 		}
+#endif
 	}
+#if ENABLE_RAMLINK
+		ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_C64_TO_REU);
 #endif
 
 	printf("%cCopied %3u\n", 19, (unsigned int)(address>>16));
@@ -111,38 +117,40 @@ static unsigned char backup(unsigned long size, const char *filename) {
 }
 
 
-static unsigned char backup_reu(unsigned long size, const char *filename) {
+static unsigned char restore_reu(unsigned long size, const char *filename) {
 	unsigned long address;
 
 #if ENABLE_DOS
-	if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_ALWAYS|ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
+	if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_READ) != 0) {
 		printf("can't open '%s':\n  %s\n", filename, ultimate_ci_status);
 		return 1;
 	}
+
+	/* TODO: check file size */
 #endif
 
-	printf("%cCopied   0 of %3u\n", 147, (unsigned int)(size >> 16));
-	for (address = 0; address < size; address += BUFFER_SIZE) {
-		printf("%cCopied %3u", 19, (unsigned int)(address>>16));
-#if ENABLE_RAMLINK
-		ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
-#endif
-#if ENABLE_REU
-		reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_C64_TO_REU);
-#endif
-	}
-	printf("%cCopied %3u\n", 19, (unsigned int)(address>>16));
-
-	printf("Saving REU\n");
+	printf("Loading REU\n");
 
 #if ENABLE_DOS
-	if (ultimate_dos_save_reu(1, 0, size) == NULL) {
-		printf("can't save REU:\n  %s\n", filename, ultimate_ci_status);
+	if (ultimate_dos_load_reu(1, 0, size) == NULL) {
+		printf("can't load REU:\n  %s\n", filename, ultimate_ci_status);
 		ultimate_dos_close_file(1);
 		return 1;
 	}
 	ultimate_dos_close_file(1);
 #endif
+
+	printf("%cCopied   0 of %3u\n", 147, (unsigned int)(size >> 16));
+	for (address = 0; address < size; address += BUFFER_SIZE) {
+		printf("%cCopied %3u", 19, (unsigned int)(address>>16));
+#if ENABLE_REU
+		reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
+#endif
+#if ENABLE_RAMLINK
+		ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_C64_TO_REU);
+#endif
+	}
+	printf("%cCopied %3u\n", 19, (unsigned int)(address>>16));
 
 	return 0;
 }

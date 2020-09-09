@@ -35,12 +35,13 @@
 ultimate.lib
 .Sh SYNOPSIS
 .In ultimate/ci.h
-.Ft unsigned char 
+.Ft unsigned char
 .Fn ultimate_ci_detect
 .Sh DESCRIPTION
 .Pp
 Detects wether the Ultimate command interface is available.
-Executing a command when the interface is not present might hang.
+Since executing a command when the interface is not present might hang,
+you should call this function first.
 .Sh RETURN VALUES
 Returns 1 if the Ultimate command interface was detected, 0 if not.
 .Sh SEE ALSO

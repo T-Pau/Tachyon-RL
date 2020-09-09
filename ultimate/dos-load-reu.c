@@ -1,5 +1,5 @@
 /*
-  ci-detect.c -- Detect Ultimate command interface.
+  dos-load-reu.c -- Load data into REU from open file.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of ultimate, a cc65 implementation of the
@@ -28,8 +28,24 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "ci.h"
+#include "dos-internal.h"
 
-unsigned char ultimate_ci_detect(void) {
-    return (ULTIMATE_CI.command == 0xc9 && ULTIMATE_CI.status == 0);
+#include <stddef.h>
+
+const unsigned char *ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length) {
+	ULTIMATE_CI.command = instance;
+	ULTIMATE_CI.command = ULTIMATE_DOS_CMD_LOAD_REU;
+	ultimate_ci_write_long(address);
+	ultimate_ci_write_long(length);
+	    if (ultimate_ci_execute() != 0) {
+        return NULL;
+    }
+
+    length = ultimate_ci_read(ultimate_dos_buffer, ULTIMATE_DOS_BUFFER_LENGTH);
+    if (length == 0) {
+        return NULL;
+    }
+    ultimate_ci_ascii2pet(ultimate_dos_buffer, length);
+    ultimate_dos_buffer[length] = '\0';
+    return ultimate_dos_buffer;
 }

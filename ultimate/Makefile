@@ -23,9 +23,11 @@ SOURCES=\
 	dos-get-path.c \
 	dos-get-string.c \
 	dos-identify.c \
+	dos-load-reu.c \
 	dos-open-file.c \
 	dos-read-data.c \
 	dos-rename-file.c \
+	dos-save-reu.c \
 	dos-write-data.c
 
 TMP=${SOURCES:.c=.o}

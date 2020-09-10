@@ -7,9 +7,14 @@ PROGRAMS=\
 	write-test.prg
 
 LIBS = \
+	backup.lib \
 	ramlink/ramlink.lib \
 	reu/reu.lib \
 	ultimate/ultimate.lib
+
+backup_SOURCES = \
+	detect.c \
+	timer-cia.c
 
 all: ${DISK}
 
@@ -24,11 +29,14 @@ ${DISK}: ${PROGRAMS} mkd64 filelist
 .s.o:
 	cl65 -t c64 -c -g -o $@ $<
 
-backup-ultimate.prg: backup-ultimate.o timer-cia.o ${LIBS}
-	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o timer-cia.o ${LIBS}
+backup.lib: ${backup_SOURCES:.c=.o}
+	ar65 r backup.lib ${backup_SOURCES:.c=.o}
 
-restore-ultimate.prg: restore-ultimate.o timer-cia.o ${LIBS}
-	cl65 -t c64 -o restore-ultimate.prg restore-ultimate.o timer-cia.o ${LIBS}
+backup-ultimate.prg: backup-ultimate.o ${LIBS}
+	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o ${LIBS}
 
-write-test.prg: write-test.o timer-cia.o ${LIBS}
-	cl65 -t c64 -o write-test.prg write-test.o timer-cia.o ${LIBS}
+restore-ultimate.prg: restore-ultimate.o ${LIBS}
+	cl65 -t c64 -o restore-ultimate.prg restore-ultimate.o ${LIBS}
+
+write-test.prg: write-test.o ${LIBS}
+	cl65 -t c64 -o write-test.prg write-test.o ${LIBS}

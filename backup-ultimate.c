@@ -5,6 +5,7 @@
 #include "ultimate/ci.h"
 #include "ultimate/dos.h"
 
+#include "detect.h"
 #include "timer.h"
 
 /* disable operations for profiling */
@@ -23,31 +24,13 @@ char filename[256];
 
 int main(void) {
 	const char *string;
-	unsigned long size;
-	unsigned long reu_size;
-	unsigned ret;
+	unsigned int ret;
 
 	printf("%cBacking up RAMLink\n\n", 147);
 
-	printf("Detecting RAMLink: ");
-	if ((size = ramlink_get_size()) == 0) {
-		printf("not found.\n");
+	if (detect() != 0) {
 		return 0;
 	}
-	printf("%lu bytes\n", size);
-
-	printf("Detecting REU: ");
-	if ((reu_size = (unsigned long)reu_detect() << 16) == 0) {
-		printf("not found.\n");
-	}
-	printf("%lu bytes\n", reu_size);
-
-	printf("Detecting Ultimate DOS: ");
-	if ((string = ultimate_dos_identify(1)) == NULL) {
-		printf("not found\n");
-		return 0;
-	}
-	printf("%s\n", string);
 
 	string = ultimate_dos_copy_home_path(1);
 	printf("Current directory:\n  %s\n", string);
@@ -57,11 +40,11 @@ int main(void) {
 	filename[strlen(filename)-1] = '\0';
 
 	timer_start();
- 	if (reu_size >= size) {
- 		ret = backup_reu(size, filename);
+ 	if (use_reu) {
+ 		ret = backup_reu(ramlink_size, filename);
  	}
  	else {
-		ret = backup(size, filename);
+		ret = backup(ramlink_size, filename);
 	}
 	timer_stop();
 

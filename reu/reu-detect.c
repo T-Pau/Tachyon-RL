@@ -14,9 +14,19 @@ unsigned int reu_detect(void) {
 	bank = 0;
 	do {
 		REU.c64_address = (unsigned int)(backup + bank);
+        REU.reu_bank = bank;
 		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_REU_TO_C64;
 		++bank;
 	} while (bank != 0);
+
+    /* see if REU is present at all */
+    buffer[0] = backup[0] ^ 0xff;
+    REU.c64_address = buffer;
+    REU.reu_bank = 0;
+	REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_REU_TO_C64;
+    if (buffer[0] != backup[0]) {
+        return 0;
+    }
 
 	/* write bank number to first byte of each bank */
 	REU.c64_address = (unsigned int)buffer;

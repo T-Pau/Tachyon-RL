@@ -98,8 +98,8 @@ static unsigned char backup(unsigned long size, const char *filename) {
 			ultimate_dos_close_file(1);
 			return 1;
 		}
-	}
 #endif
+	}
 
 	printf("%cCopied %3u\n", 19, (unsigned int)(address>>16));
 

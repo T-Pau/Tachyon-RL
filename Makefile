@@ -12,7 +12,12 @@ LIBS = \
 	ultimate/ultimate.lib
 
 backup_SOURCES = \
+	backup-dos.c \
+	backup-reu.c \
+	backup-reu-dma.c \
+	buffer.c \
 	detect.c \
+	restore-reu-dma.c \
 	timer-cia.c
 
 all: ${DISK}

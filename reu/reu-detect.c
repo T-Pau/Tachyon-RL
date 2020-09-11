@@ -13,7 +13,7 @@ unsigned int reu_detect(void) {
 	/* back up first byte of each bank */
 	bank = 0;
 	do {
-		REU.c64_address = (unsigned int)(backup + bank);
+		REU.c64_address = backup + bank;
         REU.reu_bank = bank;
 		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_REU_TO_C64;
 		++bank;
@@ -29,7 +29,7 @@ unsigned int reu_detect(void) {
     }
 
 	/* write bank number to first byte of each bank */
-	REU.c64_address = (unsigned int)buffer;
+	REU.c64_address = buffer;
 	bank = 0;
 	do {
 		buffer[0] = bank;
@@ -59,7 +59,7 @@ unsigned int reu_detect(void) {
 	/* restore first byte of each bank */
 	bank = 0;
 	do {
-		REU.c64_address = (unsigned int)(backup + bank);
+		REU.c64_address = (backup + bank);
 		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_C64_TO_REU;
 		++bank;
 	} while (bank != 0);

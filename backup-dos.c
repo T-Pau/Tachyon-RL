@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-unsigned char backup_reu(const char *filename) {
+unsigned char backup_dos(const char *filename) {
     static unsigned long address;
     
 #if ENABLE_DOS
@@ -18,20 +18,18 @@ unsigned char backup_reu(const char *filename) {
 #if ENABLE_RAMLINK
         ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
 #endif
-#if ENABLE_REU
-        reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_C64_TO_REU);
+#if ENABLE_DOS
+        if (ultimate_dos_write_data(1, buffer, BUFFER_SIZE) != 0) {
+            printf("\ncan't write to '%s':\n  %s\n", filename, ultimate_ci_status);
+            ultimate_dos_close_file(1);
+            return 1;
+        }
 #endif
     }
+    
     printf("%cCopied %3u\n", 19, (unsigned int)(address>>16));
     
-    printf("Saving REU\n");
-    
-#if ENABLE_DOS
-    if (ultimate_dos_save_reu(1, 0, ramlink_size) == NULL) {
-        printf("can't save REU:\n  %s\n", filename, ultimate_ci_status);
-        ultimate_dos_close_file(1);
-        return 1;
-    }
+#ifdef ENABLE_DOS
     ultimate_dos_close_file(1);
 #endif
     

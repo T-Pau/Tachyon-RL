@@ -17,7 +17,7 @@
 struct reu_registers {
 	unsigned char status;
 	unsigned char command;
-	unsigned int c64_address;
+	void *c64_address;
 	unsigned int reu_address;
 	unsigned char reu_bank;
 	unsigned int length;

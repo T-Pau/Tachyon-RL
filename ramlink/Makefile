@@ -4,7 +4,8 @@ SOURCES=\
 	ramlink-copy.c \
 	ramlink-copy-block.c \
 	ramlink-detect.c \
-	ramlink-get-size.c
+	ramlink-get-size.c \
+	ramlink-reu-dma.c
 
 all: ${LIB}
 

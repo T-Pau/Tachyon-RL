@@ -1,4 +1,4 @@
-#include "detect.h"
+#include "ramlink-backup.h"
 
 #include <stdio.h>
 
@@ -9,7 +9,6 @@
 unsigned char dos;
 unsigned long ramlink_size;
 unsigned long reu_size;
-unsigned char use_reu;
 
 unsigned char detect(void) {
     const char *string;
@@ -44,11 +43,6 @@ unsigned char detect(void) {
     if (!ok) {
         return 1;
     }
-
-	if (reu_size >= ramlink_size) {
-		printf("Using REU for faster transfer.\n\n");
-        use_reu = 1;
-	}
 
     return 0;
 }

@@ -30,6 +30,18 @@ struct ramlink_block_registers {
 #define RAMLINK_REU (*(struct reu_registers *)0xde00)
 #define RAMLINK_BLOCK (*(struct ramlink_block_registers *)0xde20)
 
+/* Where RAMLink maps in a page of its RAM. */
+#define RAMLINK_DATA ((unsigned char *)0xde00)
+
+/* Which page to map in */
+#define RAMLINK_PAGE (*(unsigned int *)0xdfa0)
+
+#define ramlink_activate() (asm("sta $df7e"))
+#define ramlink_deactivate() (asm("sta $df7f"))
+#define ramlink_show_registers() (asm("sta $dfc0"))
+#define ramlink_show_data() (asm("sta $dfc1"))
+
+void ramlink_reu_dma(unsigned char mode, unsigned int ramlink_page, unsigned int reu_page, unsigned int length);
 void ramlink_reu_copy(unsigned long ramlink_address, void *c64_address, unsigned int length, unsigned char mode);
 unsigned char ramlink_copy_block(unsigned char partition, unsigned char track, unsigned char sector, void *c64_address, unsigned char job);
 unsigned char ramlink_detect(void);

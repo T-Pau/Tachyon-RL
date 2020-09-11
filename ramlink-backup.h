@@ -19,8 +19,8 @@ extern unsigned long reu_size;
 
 extern unsigned char buffer[BUFFER_SIZE];
 
-#define ramlink_pages (*(unsigned int *)((unsigned char *)ramlink_size + 1))
-#define reu_pages (*(unsigned int *)((unsigned char *)reu_size + 1))
+#define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
+#define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
 
 unsigned char backup_dos(const char *filename);
 unsigned char backup_reu(const char *filename);

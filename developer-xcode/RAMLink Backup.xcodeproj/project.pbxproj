@@ -71,6 +71,7 @@
 		4B33464B250B71DF00B7A144 /* backup-dos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-dos.c"; sourceTree = "<group>"; };
 		4B33464C250B729600B7A144 /* restore-reu-dma.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-reu-dma.c"; sourceTree = "<group>"; };
 		4B33464D250B757A00B7A144 /* buffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -183,6 +184,7 @@
 				4B33463C250B6CD500B7A144 /* timer-cia.c */,
 				4B334649250B6CD500B7A144 /* timer.h */,
 				4B33463F250B6CD500B7A144 /* write-test.c */,
+				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
 			);
 			name = src;
 			path = ..;

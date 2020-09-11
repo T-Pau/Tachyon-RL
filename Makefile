@@ -3,6 +3,7 @@ SUBDIRS = ramlink reu ultimate
 DISK=ramlink-backup.d64
 PROGRAMS=\
 	ramlink-backup.prg \
+	rl-reu.prg \
 	write-test.prg
 
 LIBS = \
@@ -41,3 +42,6 @@ ramlink-backup.prg: main.o ${LIBS}
 
 write-test.prg: write-test.o ${LIBS}
 	cl65 -t c64 -o write-test.prg write-test.o ${LIBS}
+
+rl-reu.prg: rl-reu.o ${LIBS}
+	cl65 -t c64 -o rl-reu.prg rl-reu.o ${LIBS}

@@ -7,6 +7,8 @@ unsigned char backup_reu_dma(const char *filename) {
     static unsigned int length;
     static const unsigned char *string;
     
+    unsigned long length_bytes = ramlink_size;
+    
 #if ENABLE_DOS
     if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_ALWAYS|ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
         printf("can't open '%s':\n  %s\n", filename, ultimate_ci_status);
@@ -18,6 +20,7 @@ unsigned char backup_reu_dma(const char *filename) {
     length = ramlink_pages;
     if (length > reu_pages) {
         length = reu_pages;
+        length_bytes = reu_size;
     }
     
     do {
@@ -27,7 +30,7 @@ unsigned char backup_reu_dma(const char *filename) {
 #endif
         printf("Saving REU: ");
 #if ENABLE_DOS
-        if ((string=ultimate_dos_save_reu(1, 0, length)) == NULL) {
+        if ((string=ultimate_dos_save_reu(1, 0, length_bytes)) == NULL) {
             printf("\ncan't save REU:\n  %s\n", filename, ultimate_ci_status);
             ultimate_dos_close_file(1);
             return 1;

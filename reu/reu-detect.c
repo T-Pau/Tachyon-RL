@@ -60,6 +60,7 @@ unsigned int reu_detect(void) {
 	bank = 0;
 	do {
 		REU.c64_address = (backup + bank);
+        REU.reu_bank = bank;
 		REU.command = REU_COMMAND_DEFAULT | REU_COMMAND_C64_TO_REU;
 		++bank;
 	} while (bank != 0);

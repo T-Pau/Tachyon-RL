@@ -24,8 +24,9 @@ int main(void) {
     do {
         gotox(0);
         printf("B)ackup or R)estore? ");
-        ret = getchar();
+        ret = cgetc();
     } while (ret != 'B' && ret != 'b' && ret != 'R' && ret != 'r');
+    printf("%c\n", ret);
     
 	printf("Filename: ");
 	fgets(filename, 256, stdin);
@@ -33,7 +34,7 @@ int main(void) {
     
     if (ret == 'B' || ret == 'b') {
         timer_start();
-        backup();
+        ret = backup();
         timer_stop();
         
         if (ret == 0) {
@@ -49,13 +50,14 @@ int main(void) {
         printf("You are about to restore RAMLink.\n");
         printf("This will erase its current contents.\n");
         printf("Are you sure? ");
-        ret = getchar();
+        ret = cgetc();
+        printf("%c\n", ret);
         if (ret != 'Y' && ret != 'y') {
             return 0;
         }
         
         timer_start();
-        restore();
+        ret = restore();
         timer_stop();
         
         if (ret == 0) {

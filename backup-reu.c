@@ -6,7 +6,7 @@
 unsigned char backup_reu(void) {
     static unsigned long address;
     
-    printf("Copying RAMLink to REU:    0 of %3u", (unsigned int)(ramlink_size >> 16));
+    printf("Copying RAMLink to REU:   0 of %3u", (unsigned int)(ramlink_size >> 16));
     for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {
         gotox(0);
         printf("Copying RAMLink to REU: %3u", (unsigned int)(address>>16));

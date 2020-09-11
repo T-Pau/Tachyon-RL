@@ -2,8 +2,7 @@ SUBDIRS = ramlink reu ultimate
 
 DISK=ramlink-backup.d64
 PROGRAMS=\
-	backup-ultimate.prg \
-	restore-ultimate.prg \
+	ramlink-backup.prg \
 	write-test.prg
 
 LIBS = \
@@ -32,11 +31,8 @@ ${DISK}: ${PROGRAMS} mkd64 filelist
 backup.lib: ${backup_SOURCES:.c=.o}
 	ar65 r backup.lib ${backup_SOURCES:.c=.o}
 
-backup-ultimate.prg: backup-ultimate.o ${LIBS}
-	cl65 -t c64 -o backup-ultimate.prg backup-ultimate.o ${LIBS}
-
-restore-ultimate.prg: restore-ultimate.o ${LIBS}
-	cl65 -t c64 -o restore-ultimate.prg restore-ultimate.o ${LIBS}
+ramlink-backup.prg: main.o ${LIBS}
+	cl65 -t c64 -o $@ main.o ${LIBS}
 
 write-test.prg: write-test.o ${LIBS}
 	cl65 -t c64 -o write-test.prg write-test.o ${LIBS}

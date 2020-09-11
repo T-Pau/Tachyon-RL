@@ -1,20 +1,12 @@
-#include "ramlink-backup.h"
+#include "tachyon.h"
 
 #include <stdio.h>
 
-unsigned char backup_reu_dma(const char *filename) {
+unsigned char backup_reu_dma(void) {
     static unsigned int page;
     static unsigned int length;
-    static const unsigned char *string;
     
     unsigned long length_bytes = ramlink_size;
-    
-#if ENABLE_DOS
-    if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_ALWAYS|ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
-        printf("can't open '%s':\n  %s\n", filename, ultimate_ci_status);
-        return 1;
-    }
-#endif
     
     page = 0;
     length = ramlink_pages;
@@ -28,21 +20,15 @@ unsigned char backup_reu_dma(const char *filename) {
 #if ENABLE_RAMLINK && ENABLE_REU
         ramlink_reu_dma(REU_COMMAND_C64_TO_REU, page, 0, length);
 #endif
-        printf("Saving REU: ");
+        printf("Saving REU.\n");
 #if ENABLE_DOS
-        if ((string=ultimate_dos_save_reu(1, 0, length_bytes)) == NULL) {
+        if (ultimate_dos_save_reu(1, 0, length_bytes) != 0) {
             printf("\ncan't save REU:\n  %s\n", filename, ultimate_ci_status);
-            ultimate_dos_close_file(1);
             return 1;
         }
-        printf("%s\n", string);
 #endif
         page += length;
     } while (page != ramlink_pages);
     
-#if ENABLE_DOS
-    ultimate_dos_close_file(1);
-#endif
-
     return 0;
 }

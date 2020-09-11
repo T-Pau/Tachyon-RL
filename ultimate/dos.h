@@ -115,7 +115,7 @@ const unsigned char *ultimate_dos_get_path(unsigned char instance);
 const unsigned char *ultimate_dos_identify(unsigned char instance);
 
 
-const unsigned char *ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length);
+unsigned char ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length);
 
 /*
   Opens file. See ULTIMATE_DOS_OPEN_* for mode bits.
@@ -131,7 +131,7 @@ unsigned int ultimate_dos_read_data(unsigned char instance, unsigned char *buffe
 
 unsigned char ultimate_dos_rename_file(unsigned char instance, const unsigned char *old_name, const unsigned char *new_name);
 
-const unsigned char *ultimate_dos_save_reu(unsigned char instance, unsigned long address, unsigned long length);
+unsigned char ultimate_dos_save_reu(unsigned char instance, unsigned long address, unsigned long length);
 
 /*
   Writes data from buffer into open file.

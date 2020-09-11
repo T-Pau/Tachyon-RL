@@ -32,20 +32,35 @@
 
 #include <stddef.h>
 
-const unsigned char *ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length) {
-	ULTIMATE_CI.command = instance;
-	ULTIMATE_CI.command = ULTIMATE_DOS_CMD_LOAD_REU;
-	ultimate_ci_write_long(address);
-	ultimate_ci_write_long(length);
-	    if (ultimate_ci_execute() != 0) {
-        return NULL;
-    }
+#define PART_SIZE ((unsigned long)8*1024*1024)
 
-    length = ultimate_ci_read(ultimate_dos_buffer, ULTIMATE_DOS_BUFFER_LENGTH);
-    if (length == 0) {
-        return NULL;
+unsigned char ultimate_dos_load_reu(unsigned char instance, unsigned long address, unsigned long length) {
+    if (length & 0xff000000) {
+        if (address > 0) {
+            --length;
+        }
+        else {
+            ULTIMATE_CI.command = instance;
+            ULTIMATE_CI.command = ULTIMATE_DOS_CMD_LOAD_REU;
+            ultimate_ci_write_long(address);
+            ultimate_ci_write_long(PART_SIZE);
+            if (ultimate_ci_execute() != 0) {
+                return ultimate_ci_status_code;
+            }
+            ultimate_ci_done();
+            address += PART_SIZE;
+            length -= PART_SIZE;
+        }
     }
-    ultimate_ci_ascii2pet(ultimate_dos_buffer, length);
-    ultimate_dos_buffer[length] = '\0';
-    return ultimate_dos_buffer;
+    
+    ULTIMATE_CI.command = instance;
+    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_LOAD_REU;
+    ultimate_ci_write_long(address);
+    ultimate_ci_write_long(length);
+    if (ultimate_ci_execute() != 0) {
+        return ultimate_ci_status_code;
+    }
+    ultimate_ci_done();
+    
+    return 0;
 }

@@ -4,7 +4,7 @@
 void ramlink_reu_copy(unsigned long reu_address, void *c64_address, unsigned int length, unsigned char mode) {
 	ramlink_reu_enable();
 
-	RAMLINK_REU.c64_address = (unsigned int)c64_address;
+	RAMLINK_REU.c64_address = c64_address;
 	RAMLINK_REU.reu_address = reu_address & 0xffff;
 	RAMLINK_REU.reu_bank = reu_address >> 16;
 	RAMLINK_REU.length = length;

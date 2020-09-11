@@ -55,7 +55,7 @@
 		4B33462D250B690500B7A144 /* reu-detect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "reu-detect.c"; sourceTree = "<group>"; };
 		4B33463C250B6CD500B7A144 /* timer-cia.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "timer-cia.c"; sourceTree = "<group>"; };
 		4B33463D250B6CD500B7A144 /* mkd64 */ = {isa = PBXFileReference; lastKnownFileType = text; path = mkd64; sourceTree = "<group>"; };
-		4B33463E250B6CD500B7A144 /* ramlink-backup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ramlink-backup.h"; sourceTree = "<group>"; };
+		4B33463E250B6CD500B7A144 /* tachyon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tachyon.h; sourceTree = "<group>"; };
 		4B33463F250B6CD500B7A144 /* write-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "write-test.c"; sourceTree = "<group>"; };
 		4B334640250B6CD500B7A144 /* filelist */ = {isa = PBXFileReference; lastKnownFileType = text; path = filelist; sourceTree = "<group>"; };
 		4B334641250B6CD500B7A144 /* ramlink.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ramlink.o; sourceTree = "<group>"; };
@@ -63,7 +63,6 @@
 		4B334643250B6CD500B7A144 /* backup-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-reu.c"; sourceTree = "<group>"; };
 		4B334644250B6CD500B7A144 /* backup.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = backup.o; sourceTree = "<group>"; };
 		4B334645250B6CD500B7A144 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		4B334646250B6CD500B7A144 /* restore-ultimate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-ultimate.c"; sourceTree = "<group>"; };
 		4B334647250B6CD500B7A144 /* restore-ultimate.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = "restore-ultimate.o"; sourceTree = "<group>"; };
 		4B334648250B6CD500B7A144 /* detect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = detect.c; sourceTree = "<group>"; };
 		4B334649250B6CD500B7A144 /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
@@ -71,6 +70,10 @@
 		4B33464B250B71DF00B7A144 /* backup-dos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-dos.c"; sourceTree = "<group>"; };
 		4B33464C250B729600B7A144 /* restore-reu-dma.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-reu-dma.c"; sourceTree = "<group>"; };
 		4B33464D250B757A00B7A144 /* buffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		4B33464F250BB5B100B7A144 /* backup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = backup.c; sourceTree = "<group>"; };
+		4B334650250BB72D00B7A144 /* restore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = restore.c; sourceTree = "<group>"; };
+		4B334651250BB86800B7A144 /* restore-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-reu.c"; sourceTree = "<group>"; };
+		4B334652250BB87700B7A144 /* restore-dos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-dos.c"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +172,7 @@
 				4B33464B250B71DF00B7A144 /* backup-dos.c */,
 				4B33464A250B6D5C00B7A144 /* backup-reu-dma.c */,
 				4B334643250B6CD500B7A144 /* backup-reu.c */,
+				4B33464F250BB5B100B7A144 /* backup.c */,
 				4B334644250B6CD500B7A144 /* backup.o */,
 				4B33464D250B757A00B7A144 /* buffer.c */,
 				4B334648250B6CD500B7A144 /* detect.c */,
@@ -176,15 +180,17 @@
 				4B334645250B6CD500B7A144 /* main.c */,
 				4B334642250B6CD500B7A144 /* Makefile */,
 				4B33463D250B6CD500B7A144 /* mkd64 */,
-				4B33463E250B6CD500B7A144 /* ramlink-backup.h */,
 				4B334641250B6CD500B7A144 /* ramlink.o */,
+				4B334652250BB87700B7A144 /* restore-dos.c */,
 				4B33464C250B729600B7A144 /* restore-reu-dma.c */,
-				4B334646250B6CD500B7A144 /* restore-ultimate.c */,
+				4B334651250BB86800B7A144 /* restore-reu.c */,
 				4B334647250B6CD500B7A144 /* restore-ultimate.o */,
+				4B334650250BB72D00B7A144 /* restore.c */,
+				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
+				4B33463E250B6CD500B7A144 /* tachyon.h */,
 				4B33463C250B6CD500B7A144 /* timer-cia.c */,
 				4B334649250B6CD500B7A144 /* timer.h */,
 				4B33463F250B6CD500B7A144 /* write-test.c */,
-				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
 			);
 			name = src;
 			path = ..;

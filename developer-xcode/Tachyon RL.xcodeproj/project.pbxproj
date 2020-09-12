@@ -11,7 +11,7 @@
 		4B3345DD250B690500B7A144 /* ci-write.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "ci-write.s"; sourceTree = "<group>"; };
 		4B3345DF250B690500B7A144 /* ci-status.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ci-status.c"; sourceTree = "<group>"; };
 		4B3345E0250B690500B7A144 /* dos-file-seek.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-file-seek.c"; sourceTree = "<group>"; };
-		4B3345E2250B690500B7A144 /* ci-read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ci-read.c"; sourceTree = "<group>"; };
+		4B3345E2250B690500B7A144 /* ci-read-not.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ci-read-not.c"; sourceTree = "<group>"; };
 		4B3345E4250B690500B7A144 /* dos-save-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-save-reu.c"; sourceTree = "<group>"; };
 		4B3345E5250B690500B7A144 /* net.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
 		4B3345E8250B690500B7A144 /* dos-get-path.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-get-path.c"; sourceTree = "<group>"; };
@@ -74,6 +74,7 @@
 		4B334650250BB72D00B7A144 /* restore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = restore.c; sourceTree = "<group>"; };
 		4B334651250BB86800B7A144 /* restore-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-reu.c"; sourceTree = "<group>"; };
 		4B334652250BB87700B7A144 /* restore-dos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-dos.c"; sourceTree = "<group>"; };
+		4B334653250CC8D900B7A144 /* ci-read.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "ci-read.s"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +96,8 @@
 				4B3345EC250B690500B7A144 /* ci-detect.c */,
 				4B334606250B690500B7A144 /* ci-done.c */,
 				4B334608250B690500B7A144 /* ci-execute.c */,
-				4B3345E2250B690500B7A144 /* ci-read.c */,
+				4B3345E2250B690500B7A144 /* ci-read-not.c */,
+				4B334653250CC8D900B7A144 /* ci-read.s */,
 				4B3345DF250B690500B7A144 /* ci-status.c */,
 				4B3345F6250B690500B7A144 /* ci-write-string.c */,
 				4B3345DD250B690500B7A144 /* ci-write.s */,
@@ -204,7 +206,7 @@
 			attributes = {
 				LastUpgradeCheck = 1170;
 			};
-			buildConfigurationList = 4B3345D6250B689200B7A144 /* Build configuration list for PBXProject "RAMLink Backup" */;
+			buildConfigurationList = 4B3345D6250B689200B7A144 /* Build configuration list for PBXProject "Tachyon RL" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -236,7 +238,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4B3345D6250B689200B7A144 /* Build configuration list for PBXProject "RAMLink Backup" */ = {
+		4B3345D6250B689200B7A144 /* Build configuration list for PBXProject "Tachyon RL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4B3345D7250B689200B7A144 /* Debug */,

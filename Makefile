@@ -3,6 +3,7 @@ SUBDIRS = ramlink reu ultimate
 DISK=ramlink-backup.d64
 PROGRAMS=\
 	tachyon-rl.prg \
+	read-test.prg \
 	rl-reu.prg \
 	write-test.prg
 
@@ -43,6 +44,9 @@ tachyon.lib: ${backup_SOURCES:.c=.o}
 
 tachyon-rl.prg: main.o ${LIBS}
 	cl65 -t c64 -o $@ main.o ${LIBS}
+
+read-test.prg: read-test.o ${LIBS}
+	cl65 -t c64 -o $@ read-test.o ${LIBS}
 
 write-test.prg: write-test.o ${LIBS}
 	cl65 -t c64 -o $@ write-test.o ${LIBS}

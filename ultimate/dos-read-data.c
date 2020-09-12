@@ -31,11 +31,14 @@
 #include "dos-internal.h"
 
 unsigned int ultimate_dos_read_data(unsigned char instance, unsigned char *buffer, unsigned int length) {
+    static int n;
     ULTIMATE_CI.command = instance;
     ULTIMATE_CI.command = ULTIMATE_DOS_CMD_READ_DATA;
     ultimate_ci_write_int(length);
     if (ultimate_ci_execute() != 0) {
         return 0;
     }
-    return ultimate_ci_read(buffer, length);
+    n = ultimate_ci_read(buffer, length);
+    ultimate_ci_done();
+    return n;
 }

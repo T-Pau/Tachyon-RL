@@ -58,7 +58,7 @@
 loop:
         lda $df1c
         and #$20
-        bne end
+        beq end
 loop_packet:
         lda $df1c
         bpl end_packet

@@ -41,15 +41,21 @@ unsigned char ultimate_ci_execute(void) {
 
     /* read status */
     ultimate_ci_status_length = 0;
+    ultimate_ci_status[2] = ' '; /* to detect non-numeric status that's shorter than 3 bytes */
     while (ULTIMATE_CI.control & ULTIMATE_CI_STAT_AV) {
         ultimate_ci_status[ultimate_ci_status_length] = ULTIMATE_CI.status;
         ++ultimate_ci_status_length;
     }
     ultimate_ci_status[ultimate_ci_status_length] = '\0';
 
-    if (ultimate_ci_status_length < 2) {
-        return 0;
+    if (ultimate_ci_status_length == 0) {
+        ultimate_ci_status_code = 0;
     }
-    ultimate_ci_status_code = (ultimate_ci_status[0] - '0') * 10 + (ultimate_ci_status[1] - '0');
+    else if (ultimate_ci_status[2] != ',') {
+        ultimate_ci_status_code = ULTIMATE_CI_STATUS_ERROR;
+    }
+    else {
+        ultimate_ci_status_code = (ultimate_ci_status[0] - '0') * 10 + (ultimate_ci_status[1] - '0');
+    }
     return ultimate_ci_status_code;
 }

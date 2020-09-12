@@ -46,6 +46,9 @@
 #define ULTIMATE_CI_ERROR 0x08
 #define ULTIMATE_CI_CMD_BUSY 0x01
 
+#define ULTIMATE_CI_STATUS_OK 0x00
+#define ULTIMATE_CI_STATUS_ERROR 0xff /* error without numeric code */
+
 struct ultimate_ci_registers {
     unsigned char control;
     unsigned char command;

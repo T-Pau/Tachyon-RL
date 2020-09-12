@@ -5,7 +5,7 @@ SOURCES=\
 	ci-detect.c \
 	ci-done.c \
 	ci-execute.c \
-	ci-read.c \
+	ci-read.s \
 	ci-status.c \
 	ci-write.s \
 	ci-write-string.c \

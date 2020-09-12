@@ -5,7 +5,8 @@
 unsigned char backup(void) {
     unsigned char ret;
 #if ENABLE_DOS
-    if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_ALWAYS|ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
+    if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
+        /* TODO: promt to overwrite if status == "file exists" */
         printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
         return 1;
     }

@@ -20,11 +20,16 @@ backup_SOURCES = \
 	backup-reu-dma.c \
 	buffer.c \
 	detect.c \
+	help.c \
+	help_screen.s \
 	restore.c \
 	restore-dos.c \
 	restore-reu.c \
 	restore-reu-dma.c \
 	timer-cia.c
+
+TMP=${backup_SOURCES:.c=.o}
+backup_OBJECTS = ${TMP:.s=.o}
 
 all: ${DISK}
 
@@ -39,8 +44,8 @@ ${DISK}: ${PROGRAMS} mkd64 filelist
 .s.o:
 	cl65 -t c64 -c -g -o $@ $<
 
-tachyon.lib: ${backup_SOURCES:.c=.o}
-	ar65 r $@ ${backup_SOURCES:.c=.o}
+tachyon.lib: ${backup_OBJECTS}
+	ar65 r $@ ${backup_OBJECTS}
 
 tachyon-rl.prg: main.o ${LIBS}
 	cl65 -t c64 -o $@ main.o ${LIBS}

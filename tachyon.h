@@ -20,6 +20,8 @@ extern unsigned long reu_size;
 extern unsigned char buffer[BUFFER_SIZE];
 extern unsigned char filename[];
 
+extern const char *help_screen;
+
 #define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
 #define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
 
@@ -28,6 +30,7 @@ unsigned char backup_dos(void);
 unsigned char backup_reu(void);
 unsigned char backup_reu_dma(void);
 unsigned char detect(void);
+void help(void);
 unsigned char restore(void);
 unsigned char restore_dos(void);
 unsigned char restore_reu(void);

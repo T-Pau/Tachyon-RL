@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
+#include <ctype.h>
 
 #include "tachyon.h"
 #include "timer.h"
@@ -11,22 +12,35 @@ int main(void) {
 	const char *string;
 	unsigned int ret;
 
+    bgcolor(COLOR_BLACK);
+    bordercolor(COLOR_BLACK);
+    textcolor(COLOR_GRAY3);
     clrscr();
+    textcolor(COLOR_WHITE);
     printf("Tachyon RL - Back Up Your RAMLink\n\n");
+    textcolor(COLOR_GRAY3);
 
+#if 0
 	if (detect() != 0) {
 		return 0;
 	}
+#endif
 
 	string = ultimate_dos_copy_home_path(1);
 	printf("Current directory:\n  %s\n", string);
 
     do {
         gotox(0);
-        printf("B)ackup or R)estore? ");
-        ret = cgetc();
-    } while (ret != 'B' && ret != 'b' && ret != 'R' && ret != 'r');
-    printf("%c\n", ret);
+        printf("B)ackup, R)estore, or H)elp");
+        ret = tolower(cgetc());
+    } while (ret != 'b' && ret != 'r' && ret != 'h');
+    printf("\n");
+    
+    if (ret == 'h') {
+        help();
+        /* TODO: back to beginning */
+        return 1;
+    }
     
 	printf("Filename: ");
 	fgets(filename, 256, stdin);

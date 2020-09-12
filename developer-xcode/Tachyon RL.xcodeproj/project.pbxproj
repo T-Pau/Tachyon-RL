@@ -75,6 +75,8 @@
 		4B334651250BB86800B7A144 /* restore-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-reu.c"; sourceTree = "<group>"; };
 		4B334652250BB87700B7A144 /* restore-dos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-dos.c"; sourceTree = "<group>"; };
 		4B334653250CC8D900B7A144 /* ci-read.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "ci-read.s"; sourceTree = "<group>"; };
+		4B334654250D6A8600B7A144 /* help.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = help.c; sourceTree = "<group>"; };
+		4B334655250D6CD100B7A144 /* help_screen.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = help_screen.s; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +182,8 @@
 				4B33464D250B757A00B7A144 /* buffer.c */,
 				4B334648250B6CD500B7A144 /* detect.c */,
 				4B334640250B6CD500B7A144 /* filelist */,
+				4B334655250D6CD100B7A144 /* help_screen.s */,
+				4B334654250D6A8600B7A144 /* help.c */,
 				4B334645250B6CD500B7A144 /* main.c */,
 				4B334642250B6CD500B7A144 /* Makefile */,
 				4B33463D250B6CD500B7A144 /* mkd64 */,

@@ -22,6 +22,29 @@ struct ramlink_block_registers {
 	unsigned char c128_bank;
 };
 
+#define RAMLINK_PARTITION_UNUSED 0x00
+#define RAMLINK_PARTITION_NATIVE 0x01
+#define RAMLINK_PARTITION_D64 0x02
+#define RAMLINK_PARTITOIN_D71 0x03
+#define RAMLINK_PARTITOIN_D81 0x04
+#define RAMLINK_PARTITOIN_SYSTEM 0xff
+
+struct ramlink_partition_entry {
+    unsigned char next_track;
+    unsigned char next_sector;
+    unsigned char type;
+    unsigned char reserved[2];
+    unsigned char name[16];
+    unsigned char reserved1;
+    unsigned int offset; /* 256 byte blocks, big endian! */
+    unsigned char reserved2[6];
+    unsigned int size; /* 256 byte blocks, big endain! */
+};
+
+typedef struct ramlink_partition_entry ramlink_partition_entry_t;
+
+
+
 #define ramlink_reu_enable() (asm("jsr $e0a9"))
 #define ramlink_reu_execute_and_disable() (asm("jsr $fe1e"))
 #define ramlink_reu_execute_block() (asm("jsr $fe09"))

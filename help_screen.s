@@ -53,11 +53,13 @@ L1:
     scrcode "  directory (or / if not set). Full path"
     scrcode "  always works (e. g. /Usb0/backups/rl)."
     scrcode "                                        "
-    scrcode "Estimated time for backup or restore:   "
-    scrcode "+--------------+-----------+----------+ "
+    scrcode "Approximate time for backup or restore: "
+    .byte $70, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $72, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $72, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $6e, $20
     scrcode "| RAMLink Size |    C64    | SuperCPU | "
     scrcode "|     4 MB     | ca. 2 min | ca. 15 s | "
     scrcode "|    16 MB     | ca. 8 min | ca. 90 s | "
-    scrcode "+--------------+-----------+----------+ "
+    .byte $6d, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $71, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $71, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $7d, $20
     scrcode "                                        "
     scrcode "                  (C) 2020 Dillo / T'Pau"

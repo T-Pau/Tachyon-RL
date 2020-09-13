@@ -1,9 +1,8 @@
-;  ci-read.s -- Read request data.
+;  help_screen.s -- Help screen text.
 ;  Copyright (C) 2020 Dieter Baron
 ;
-;  This file is part of ultimate, a cc65 implementation of the
-;  Ultimate II command interface.
-;  The authors can be contacted at <ultimate@tpau.group>.
+;  This file is part of Tachyon RL, a backup program for your RAMLink.
+;  The authors can be contacted at <tachyon-rl@tpau.group>.
 ;
 ;  Redistribution and use in source and binary forms, with or without
 ;  modification, are permitted provided that the following conditions

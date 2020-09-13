@@ -31,7 +31,15 @@ backup_SOURCES = \
 TMP=${backup_SOURCES:.c=.o}
 backup_OBJECTS = ${TMP:.s=.o}
 
-all: ${DISK}
+all: subdirs ${DISK}
+
+.PHONY: subdirs
+
+subdirs:
+	@for dir in ${SUBDIRS}; \
+	do \
+		(cd $$dir && make) || exit 1; \
+	done
 
 ${DISK}: ${PROGRAMS} mkd64 filelist
 	./mkd64 ${DISK} "tachyon rl,00" filelist

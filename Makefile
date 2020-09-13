@@ -1,6 +1,7 @@
 SUBDIRS = ramlink reu ultimate
 
-DISK=ramlink-backup.d64
+DISK=Tachyon-RL.d64
+
 PROGRAMS=\
 	tachyon-rl.prg \
 	read-test.prg \
@@ -32,6 +33,9 @@ TMP=${backup_SOURCES:.c=.o}
 backup_OBJECTS = ${TMP:.s=.o}
 
 all: subdirs ${DISK}
+
+dist: all
+	zip -9rq Tachyon-RL-1.0.zip README.md Tachyon-RL.d64 tachyon-rl.prg
 
 .PHONY: subdirs
 

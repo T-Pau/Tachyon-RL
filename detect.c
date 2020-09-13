@@ -62,6 +62,7 @@ unsigned char detect(void) {
     else {
         textcolor(COLOR_LIGHTGREEN);
         print_size(ramlink_size);
+        printf("\n");
     }
     textcolor(COLOR_GRAY3);
 
@@ -76,6 +77,7 @@ unsigned char detect(void) {
 	else {
         textcolor(COLOR_LIGHTGREEN);
         print_size(reu_size);
+        printf("\n");
 	}
     textcolor(COLOR_GRAY3);
     

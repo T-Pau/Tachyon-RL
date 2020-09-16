@@ -57,7 +57,6 @@
 		4B33463E250B6CD500B7A144 /* tachyon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tachyon.h; sourceTree = "<group>"; };
 		4B33463F250B6CD500B7A144 /* write-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "write-test.c"; sourceTree = "<group>"; };
 		4B334640250B6CD500B7A144 /* filelist */ = {isa = PBXFileReference; lastKnownFileType = text; path = filelist; sourceTree = "<group>"; };
-		4B334641250B6CD500B7A144 /* ramlink.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ramlink.o; sourceTree = "<group>"; };
 		4B334642250B6CD500B7A144 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		4B334643250B6CD500B7A144 /* backup-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-reu.c"; sourceTree = "<group>"; };
 		4B334645250B6CD500B7A144 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -186,7 +185,6 @@
 				4B334645250B6CD500B7A144 /* main.c */,
 				4B334642250B6CD500B7A144 /* Makefile */,
 				4B33463D250B6CD500B7A144 /* mkd64 */,
-				4B334641250B6CD500B7A144 /* ramlink.o */,
 				4B9B7EFE250D2F0900DD3AFB /* read-test.c */,
 				4B334652250BB87700B7A144 /* restore-dos.c */,
 				4B33464C250B729600B7A144 /* restore-reu-dma.c */,

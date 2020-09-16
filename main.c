@@ -99,7 +99,7 @@ int main(void) {
             printf("This will erase its current contents.\n");
             printf("Are you sure (y/n)?\n");
             ret = tolower(cgetc());
-            if (ret != 'Y') {
+            if (ret != 'y') {
                 continue;
             }
             

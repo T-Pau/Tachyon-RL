@@ -1,5 +1,5 @@
 /*
-  dos-identify.c -- Get DOS version.
+  dos-get-time.c -- Get date and time.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of ultimate, a cc65 implementation of the
@@ -30,14 +30,62 @@
 
 #include "dos-internal.h"
 
-#include <stddef.h>
+#include <stdlib.h>
 
-const unsigned char *ultimate_dos_identify(unsigned char instance) {
-    if (!ultimate_ci_detect()) {
+struct tm *ultimate_dos_get_time(void) {
+    static struct tm tm;
+    
+    const unsigned char *timestr;
+    
+    ULTIMATE_CI.command = 1;
+    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_GET_TIME;
+    ULTIMATE_CI.command = 1;
+
+    if ((timestr = ultimate_dos_get_string()) == NULL) {
         return NULL;
     }
-
-    ULTIMATE_CI.command = instance;
-    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_IDENTIFY;
-    return ultimate_dos_get_string();
+    
+    switch (timestr[1]) {
+        case 'U':
+            if (timestr[0] == 'S') {
+                tm.tm_wday = 0;
+            }
+            else {
+                tm.tm_wday = 2;
+            }
+            break;
+            
+        case 'O':
+            tm.tm_wday = 1;
+            break;
+            
+        case 'E':
+            tm.tm_wday = 3;
+            break;
+            
+        case 'H':
+            tm.tm_wday = 4;
+            break;
+            
+        case 'R':
+            tm.tm_wday = 5;
+            break;
+            
+        case 'A':
+            tm.tm_wday = 6;
+            break;
+            
+        default:
+            return NULL;
+            
+    }
+    
+    tm.tm_year = atoi(timestr + 4) - 1900;
+    tm.tm_mon = atoi(timestr + 9) - 1;
+    tm.tm_mday = atoi(timestr + 12);
+    tm.tm_hour = atoi(timestr + 15);
+    tm.tm_min = atoi(timestr + 18);
+    tm.tm_sec = atoi(timestr + 21);
+    
+    return &tm;
 }

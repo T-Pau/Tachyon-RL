@@ -31,5 +31,7 @@
 #include "dos-internal.h"
 
 const unsigned char *ultimate_dos_get_path(unsigned char instance) {
+    ULTIMATE_CI.command = instance;
+    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_GET_PATH;
     return ultimate_dos_get_string(instance, ULTIMATE_DOS_CMD_GET_PATH);
 }

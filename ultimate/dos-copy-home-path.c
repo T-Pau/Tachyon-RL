@@ -31,5 +31,8 @@
 #include "dos-internal.h"
 
 const unsigned char *ultimate_dos_copy_home_path(unsigned char instance) {
-    return ultimate_dos_get_string(instance, ULTIMATE_DOS_CMD_COPY_HOME_PATH);
+    ULTIMATE_CI.command = instance;
+    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_COPY_HOME_PATH;
+
+    return ultimate_dos_get_string();
 }

@@ -22,6 +22,7 @@ SOURCES=\
 	dos-file-stat.c \
 	dos-get-path.c \
 	dos-get-string.c \
+	dos-get-time.c \
 	dos-identify.c \
 	dos-load-reu.c \
 	dos-open-file.c \

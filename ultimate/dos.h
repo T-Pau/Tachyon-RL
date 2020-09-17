@@ -1,6 +1,8 @@
 #ifndef HAD_ULTIMATE_DOS_H
 #define HAD_ULTIMATE_DOS_H
 
+#include <time.h>
+
 /*
   dos.h -- Public header for DOS target.
   Copyright (C) 2020 Dieter Baron
@@ -138,5 +140,7 @@ unsigned char ultimate_dos_save_reu(unsigned char instance, unsigned long addres
   Returns status.
 */
 unsigned char ultimate_dos_write_data(unsigned char instance, const unsigned char *buffer, unsigned int length);
+
+struct tm *ultimate_dos_get_time(void);
 
 #endif /* HAD_ULTIMATE_DOS_H */

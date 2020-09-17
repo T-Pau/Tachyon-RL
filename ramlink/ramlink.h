@@ -30,6 +30,8 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <time.h>
+
 #include "../reu/reu.h"
 
 #define RAMLINK_JOB_READ 0x80
@@ -72,8 +74,6 @@ struct ramlink_partition_entry {
 
 typedef struct ramlink_partition_entry ramlink_partition_entry_t;
 
-
-
 #define ramlink_reu_enable() (asm("jsr $e0a9"))
 #define ramlink_reu_execute_and_disable() (asm("jsr $fe1e"))
 #define ramlink_reu_execute_block() (asm("jsr $fe09"))
@@ -98,5 +98,6 @@ void ramlink_reu_copy(unsigned long ramlink_address, void *c64_address, unsigned
 unsigned char ramlink_copy_block(unsigned char partition, unsigned char track, unsigned char sector, void *c64_address, unsigned char job);
 unsigned char ramlink_detect(void);
 unsigned long ramlink_get_size(void);
+struct tm *ramlink_get_time(unsigned char device);
 
 #endif /* HAD_RAMLINK_H */

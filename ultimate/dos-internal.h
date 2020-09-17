@@ -65,6 +65,6 @@ extern unsigned char ultimate_dos_buffer[];
 
 #define ULTIMATE_DOS_BUFFER_LENGTH 896
 
-unsigned char *ultimate_dos_get_string(unsigned char instance, unsigned char command);
+unsigned char *ultimate_dos_get_string(void);
 
 #endif /* HAD_DOS_INTERNAL_H */

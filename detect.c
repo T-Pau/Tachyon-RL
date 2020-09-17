@@ -78,7 +78,7 @@ unsigned char detect(void) {
         }
         else {
             textcolor(COLOR_LIGHTGREEN);
-            printf("device %u, ", ramlink_device);
+            printf("#%u, ", ramlink_device);
         }
         textcolor(COLOR_LIGHTGREEN);
         print_size(ramlink_size);

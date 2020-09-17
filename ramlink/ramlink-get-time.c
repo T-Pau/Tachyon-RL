@@ -1,10 +1,9 @@
 /*
-  dos-identify.c -- Get DOS version.
+  ramlink-get-time.h -- Get date and time.
   Copyright (C) 2020 Dieter Baron
 
-  This file is part of ultimate, a cc65 implementation of the
-  Ultimate II command interface.
-  The authors can be contacted at <ultimate@tpau.group>.
+  This file is part of Tachyon RL, a backup program for your RAMLink.
+  The authors can be contacted at <tachyon-rl@tpau.group>.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -28,16 +27,35 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "dos-internal.h"
+#include "ramlink.h"
 
-#include <stddef.h>
+#include <cbm.h>
 
-const unsigned char *ultimate_dos_identify(unsigned char instance) {
-    if (!ultimate_ci_detect()) {
-        return NULL;
+struct tm *ramlink_get_time(unsigned char device) {
+    static struct tm tm;
+    
+    cbm_k_setlfs(15, device, 15);
+    cbm_k_setnam("t-rd\r");
+    cbm_k_open();
+    cbm_k_chkin(15);
+
+    tm.tm_wday = cbm_k_basin();
+    tm.tm_year = cbm_k_basin();
+    if (tm.tm_year < 70) {
+        tm.tm_year += 100;
     }
+    tm.tm_mon = cbm_k_basin() - 1;
+    tm.tm_mday = cbm_k_basin();
+    tm.tm_hour = cbm_k_basin();
+    tm.tm_min = cbm_k_basin();
+    tm.tm_sec = cbm_k_basin();
+    if (cbm_k_basin()) {
+        tm.tm_hour += 12;
+    }
+    
+    cbm_k_clrch();
+    cbm_k_close(15);
 
-    ULTIMATE_CI.command = instance;
-    ULTIMATE_CI.command = ULTIMATE_DOS_CMD_IDENTIFY;
-    return ultimate_dos_get_string();
+    return &tm;
 }
+

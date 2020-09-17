@@ -32,11 +32,8 @@
 
 #include <stddef.h>
 
-unsigned char *ultimate_dos_get_string(unsigned char instance, unsigned char command) {
+unsigned char *ultimate_dos_get_string(void) {
     unsigned int length;
-
-    ULTIMATE_CI.command = instance;
-    ULTIMATE_CI.command = command;
 
     if (ultimate_ci_execute() != 0) {
         return NULL;

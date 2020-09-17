@@ -81,6 +81,8 @@
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		4BE318FD251320AB00D92BEF /* NEWS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NEWS.md; sourceTree = "<group>"; };
+		4BE318FF25139C6B00D92BEF /* ramlink-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ramlink-get-time.c"; sourceTree = "<group>"; };
+		4BE319002513A54900D92BEF /* dos-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-get-time.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -110,6 +112,7 @@
 				4B3345F6250B690500B7A144 /* ci-write-string.c */,
 				4B3345DD250B690500B7A144 /* ci-write.s */,
 				4B3345FD250B690500B7A144 /* ci.h */,
+				4B3346562511F68F00B7A144 /* control.h */,
 				4B3345F1250B690500B7A144 /* dos-buffer.c */,
 				4B334615250B690500B7A144 /* dos-change-dir.c */,
 				4B334617250B690500B7A144 /* dos-close-file.c */,
@@ -123,6 +126,7 @@
 				4B3345F3250B690500B7A144 /* dos-file-stat.c */,
 				4B3345E8250B690500B7A144 /* dos-get-path.c */,
 				4B33460A250B690500B7A144 /* dos-get-string.c */,
+				4BE319002513A54900D92BEF /* dos-get-time.c */,
 				4B3345EA250B690500B7A144 /* dos-identify.c */,
 				4B3345FB250B690500B7A144 /* dos-internal.h */,
 				4B3345FA250B690500B7A144 /* dos-load-reu.c */,
@@ -135,7 +139,6 @@
 				4B3345EE250B690500B7A144 /* Makefile */,
 				4B3345DB250B690500B7A144 /* man */,
 				4B3345E5250B690500B7A144 /* net.h */,
-				4B3346562511F68F00B7A144 /* control.h */,
 			);
 			name = ultimate;
 			path = ../ultimate;
@@ -159,6 +162,7 @@
 				4B33461E250B690500B7A144 /* ramlink-get-size.c */,
 				4B334623250B690500B7A144 /* ramlink-reu-dma.c */,
 				4B33461B250B690500B7A144 /* ramlink.h */,
+				4BE318FF25139C6B00D92BEF /* ramlink-get-time.c */,
 			);
 			name = ramlink;
 			path = ../ramlink;

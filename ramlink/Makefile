@@ -5,6 +5,7 @@ SOURCES=\
 	ramlink-copy-block.c \
 	ramlink-detect.c \
 	ramlink-get-size.c \
+	ramlink-get-time.c \
 	ramlink-reu-dma.c
 
 all: ${LIB}

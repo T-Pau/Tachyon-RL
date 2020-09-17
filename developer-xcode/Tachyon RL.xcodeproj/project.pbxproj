@@ -77,6 +77,7 @@
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		4BE318FD251320AB00D92BEF /* NEWS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NEWS.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -84,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				4B9B7EFF250E2FAC00DD3AFB /* README.md */,
+				4BE318FD251320AB00D92BEF /* NEWS.md */,
 				4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */,
 				4B33462F250B695E00B7A144 /* src */,
 				4B33461A250B690500B7A144 /* ramlink */,

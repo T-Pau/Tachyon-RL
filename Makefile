@@ -23,6 +23,7 @@ backup_SOURCES = \
 	backup-reu-dma.c \
 	buffer.c \
 	detect.c \
+	detect-drives.s \
 	help.c \
 	help_screen.s \
 	restore.c \
@@ -72,3 +73,6 @@ write-test.prg: write-test.o ${LIBS}
 
 rl-reu.prg: rl-reu.o ${LIBS}
 	cl65 -t c64 -o $@ rl-reu.o ${LIBS}
+
+drives.prg: drives.o ${LIBS}
+	cl65 -t c64 -Ln drives.sym -o $@ $^

@@ -40,6 +40,7 @@
 
 unsigned char dos;
 unsigned long ramlink_size;
+unsigned char ramlink_device;
 unsigned long reu_size;
 
 #define OK 0
@@ -53,13 +54,32 @@ unsigned char detect(void) {
     unsigned char state = OK;
     unsigned char key;
 
-	printf("RAMLink:  ");
+    ramlink_device = 0;
+
+    printf("RAMLink:  ");
 	if ((ramlink_size = ramlink_get_size()) == 0) {
         textcolor(COLOR_LIGHTRED);
 		printf("not found\n");
         state = ERROR;
 	}
     else {
+        unsigned char i = 8;
+        
+        detect_drives();
+        for (; i < 32; ++i) {
+            if (drive_types[i] == DRIVE_TYPE_RAMLINK) {
+                ramlink_device = i;
+                break;
+            }
+        }
+        if (ramlink_device == 0) {
+            textcolor(COLOR_YELLOW);
+            printf("device not found, ");
+        }
+        else {
+            textcolor(COLOR_LIGHTGREEN);
+            printf("device %u, ", ramlink_device);
+        }
         textcolor(COLOR_LIGHTGREEN);
         print_size(ramlink_size);
         printf("\n");

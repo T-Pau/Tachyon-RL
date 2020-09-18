@@ -13,7 +13,8 @@ static struct pattern prefix[] = {
     { DRIVE_TYPE_CMD_HD, 6, "cmd hd" },
     { DRIVE_TYPE_RAMDRIVE, 6, "cmd rd" },
     { DRIVE_TYPE_RAMLINK, 6, "cmd rl" },
-    { DRIVE_TYPE_SD2IEC, 6, "sd2iec" }
+    { DRIVE_TYPE_SD2IEC, 6, "sd2iec" },
+    { DRIVE_TYPE_IDESERV, 6, " idese" }
 };
 
 static struct pattern suffix[] = {
@@ -21,7 +22,7 @@ static struct pattern suffix[] = {
     { DRIVE_TYPE_1570, 5, " 1570" },
     { DRIVE_TYPE_1571, 5, " 1571" },
     { DRIVE_TYPE_1581, 5, " 1581" },
-    { DRIVE_TYPE_IDE64, 6, " IDE64" },
+    { DRIVE_TYPE_IDE64, 6, " ide64" }
 };
 
 uint8_t drive_types[32];
@@ -36,7 +37,7 @@ void drive_detect(void) {
         ++id;
     }
     
-    for (id = 8; id < 31; ++id) {
+    for (id = 8; id < 17; ++id) {
         if ((identifier = drive_identify(id)) != NULL) {
             len = strlen(identifier);
 

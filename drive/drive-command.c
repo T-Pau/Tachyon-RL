@@ -8,12 +8,15 @@ const char *drive_command(uint8_t id, const char *command) {
     static uint8_t i;
     
     if (cbm_open(15, id, 15, command) != 0) {
+        i = _oserror;
+        cbm_close(15);
+        _oserror = i;
         return NULL;
     }
     
     if ((i = cbm_k_chkin(15)) != 0) {
+        cbm_close(15);
         _oserror = i;
-        cbm_k_close(15);
         return NULL;
     }
     
@@ -29,7 +32,7 @@ const char *drive_command(uint8_t id, const char *command) {
     buffer[i] = '\0';
         
     cbm_k_clrch();
-    cbm_k_close(15);
+    cbm_close(15);
     
     return buffer;
 }

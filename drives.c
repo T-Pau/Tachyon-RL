@@ -14,7 +14,8 @@ const char *types[] = {
     "RAMDrive",
     "RAMLink",
     "SD2IEC",
-    "IDE64"
+    "IDE64",
+    "IDESERV"
 };
 
 int main(void) {
@@ -25,7 +26,7 @@ int main(void) {
     for (i = 8; i < 32; ++i) {
         if (drive_types[i] != 0) {
             if (drive_types[i] == DRIVE_TYPE_UNKNOWN) {
-                printf("%2u: unknown drive\n");
+                printf("%2u: unknown drive\n", i);
             }
             else {
                 printf("%2u: %s\n", i, types[drive_types[i]]);

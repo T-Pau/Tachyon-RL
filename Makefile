@@ -76,3 +76,6 @@ rl-reu.prg: rl-reu.o ${LIBS}
 
 drives.prg: drives.o ${LIBS}
 	cl65 -t c64 -Ln drives.sym -o $@ $^
+
+sd2iec-write.prg: sd2iec-write.o do-write.o ${LIBS}
+	cl65 -t c64 -o $@ $^

@@ -74,8 +74,12 @@
 		4B334654250D6A8600B7A144 /* help.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = help.c; sourceTree = "<group>"; };
 		4B334655250D6CD100B7A144 /* help_screen.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = help_screen.s; sourceTree = "<group>"; };
 		4B3346562511F68F00B7A144 /* control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
-		4B33465825135E5500B7A144 /* detect-drives.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "detect-drives.s"; sourceTree = "<group>"; };
 		4B334659251370CF00B7A144 /* drives.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drives.c; sourceTree = "<group>"; };
+		4B33465F2514DB1400B7A144 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		4B3346602514DB1400B7A144 /* drive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drive.h; sourceTree = "<group>"; };
+		4B3346612514DB1400B7A144 /* drive-command.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-command.c"; sourceTree = "<group>"; };
+		4B3346622514E44F00B7A144 /* drive-identify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-identify.c"; sourceTree = "<group>"; };
+		4B3346632514E58200B7A144 /* drive-detect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-detect.c"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 				4BE318FD251320AB00D92BEF /* NEWS.md */,
 				4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */,
 				4B33462F250B695E00B7A144 /* src */,
+				4B33465E2514DB1400B7A144 /* drive */,
 				4B33461A250B690500B7A144 /* ramlink */,
 				4B334627250B690500B7A144 /* reu */,
 				4B3345D9250B690400B7A144 /* ultimate */,
@@ -190,8 +195,9 @@
 				4B334643250B6CD500B7A144 /* backup-reu.c */,
 				4B33464F250BB5B100B7A144 /* backup.c */,
 				4B33464D250B757A00B7A144 /* buffer.c */,
-				4B33465825135E5500B7A144 /* detect-drives.s */,
 				4B334648250B6CD500B7A144 /* detect.c */,
+				4BE319022514AFC400D92BEF /* do-write.s */,
+				4B334659251370CF00B7A144 /* drives.c */,
 				4B334640250B6CD500B7A144 /* filelist */,
 				4B334655250D6CD100B7A144 /* help_screen.s */,
 				4B334654250D6A8600B7A144 /* help.c */,
@@ -204,16 +210,27 @@
 				4B334651250BB86800B7A144 /* restore-reu.c */,
 				4B334650250BB72D00B7A144 /* restore.c */,
 				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
+				4BE319012514AE6B00D92BEF /* sd2iec-write.c */,
 				4B33463E250B6CD500B7A144 /* tachyon.h */,
 				4B33463C250B6CD500B7A144 /* timer-cia.c */,
 				4B334649250B6CD500B7A144 /* timer.h */,
 				4B33463F250B6CD500B7A144 /* write-test.c */,
-				4B334659251370CF00B7A144 /* drives.c */,
-				4BE319012514AE6B00D92BEF /* sd2iec-write.c */,
-				4BE319022514AFC400D92BEF /* do-write.s */,
 			);
 			name = src;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		4B33465E2514DB1400B7A144 /* drive */ = {
+			isa = PBXGroup;
+			children = (
+				4B3346612514DB1400B7A144 /* drive-command.c */,
+				4B3346632514E58200B7A144 /* drive-detect.c */,
+				4B3346622514E44F00B7A144 /* drive-identify.c */,
+				4B3346602514DB1400B7A144 /* drive.h */,
+				4B33465F2514DB1400B7A144 /* Makefile */,
+			);
+			name = drive;
+			path = ../drive;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

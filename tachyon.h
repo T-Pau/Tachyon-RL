@@ -30,20 +30,11 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "drive/drive.h"
 #include "ramlink/ramlink.h"
 #include "reu/reu.h"
 #include "ultimate/ci.h"
 #include "ultimate/dos.h"
-
-#define DRIVE_TYPE_NONE 0
-#define DRIVE_TYPE_UNKNOWN 1
-#define DRIVE_TYPE_1541 2
-#define DRIVE_TYPE_1571 3
-#define DRIVE_TYPE_1581 4
-#define DRIVE_TYPE_CMD_FD 5
-#define DRIVE_TYPE_CMD_HD 6
-#define DRIVE_TYPE_RAMDRIVE 7
-#define DRIVE_TYPE_RAMLINK 8
 
 /* disable operations for profiling */
 #define ENABLE_DOS 1

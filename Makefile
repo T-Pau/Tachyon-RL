@@ -1,4 +1,4 @@
-SUBDIRS = ramlink reu ultimate
+SUBDIRS = drive ramlink reu ultimate
 
 DISK=Tachyon-RL.d64
 
@@ -12,6 +12,7 @@ PROGRAMS=\
 
 LIBS = \
 	tachyon.lib \
+	drive/drive.lib \
 	ramlink/ramlink.lib \
 	reu/reu.lib \
 	ultimate/ultimate.lib
@@ -23,7 +24,6 @@ backup_SOURCES = \
 	backup-reu-dma.c \
 	buffer.c \
 	detect.c \
-	detect-drives.s \
 	help.c \
 	help_screen.s \
 	restore.c \

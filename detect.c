@@ -65,7 +65,7 @@ unsigned char detect(void) {
     else {
         unsigned char i = 8;
         
-        detect_drives();
+        drive_detect();
         for (; i < 32; ++i) {
             if (drive_types[i] == DRIVE_TYPE_RAMLINK) {
                 ramlink_device = i;

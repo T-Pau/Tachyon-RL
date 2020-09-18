@@ -1,28 +1,35 @@
 #include "tachyon.h"
 
 #include <stdio.h>
+#include <errno.h>
 
 const char *types[] = {
     "none",
-    "unknown",
     "1541",
+    "1570",
     "1571",
+    "1581",
     "CMD FD",
     "CMD HD",
     "RAMDrive",
-    "RAMLink"
+    "RAMLink",
+    "SD2IEC",
+    "IDE64"
 };
 
 int main(void) {
     static unsigned char i;
     
-    printf("detecting drives.\n");
-    detect_drives();
-    printf("done.\n");
+    drive_detect();
     
     for (i = 8; i < 32; ++i) {
         if (drive_types[i] != 0) {
-            printf("%u: %s\n", i, types[drive_types[i]]);
+            if (drive_types[i] == DRIVE_TYPE_UNKNOWN) {
+                printf("%2u: unknown drive\n");
+            }
+            else {
+                printf("%2u: %s\n", i, types[drive_types[i]]);
+            }
         }
     }
     

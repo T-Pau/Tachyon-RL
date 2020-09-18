@@ -46,6 +46,3 @@ all: ${LIB}
 
 ${LIB}: ${OBJECTS}
 	ar65 r ${LIB} ${OBJECTS}
-
-foo:
-	echo ${OBJECTS}

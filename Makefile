@@ -25,6 +25,7 @@ backup_SOURCES = \
 	backup-sd2iec.c \
 	buffer.c \
 	detect.c \
+	detect_cpu.c \
 	help.c \
 	help_screen.s \
 	restore.c \

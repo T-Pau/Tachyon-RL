@@ -32,7 +32,7 @@
 #include <conio.h>
 #include <stdio.h>
 
-unsigned char backup_reu(void) {
+bool backup_reu(void) {
     static unsigned long address;
     
     printf("Copying RAMLink to REU:   0 of %3u", (unsigned int)(ramlink_size >> 16));
@@ -54,9 +54,9 @@ unsigned char backup_reu(void) {
 #if ENABLE_DOS
     if (ultimate_dos_save_reu(1, 0, ramlink_size) != NULL) {
         printf("Can't save REU: %s\n", ultimate_ci_status);
-        return 1;
+        return false;
     }
 #endif
     
-    return 0;
+    return true;
 }

@@ -30,6 +30,9 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <stdbool.h>
+#include <stdint.h>
+
 #include "drive/drive.h"
 #include "ramlink/ramlink.h"
 #include "reu/reu.h"
@@ -41,36 +44,53 @@
 #define ENABLE_RAMLINK 1
 #define ENABLE_REU 1
 
-extern unsigned char dos;
-extern unsigned long ramlink_size;
-extern unsigned char ramsize_device;
-extern unsigned long reu_size;
-extern unsigned char sd2iec_device;
+#define VERSION "1.1"
+
+enum {
+    CPU_C64,
+    CPU_C128,
+    CPU_SUPERCPU_V1,
+    CPU_SUPERCPU_V2
+};
+
+enum {
+    METHOD_NONE,
+    METHOD_ULTIMATE,
+    METHOD_ULTIMATE_REU,
+    METHOD_SD2IEC
+};
+
+extern bool dos;
+extern uint32_t ramlink_size;
+extern uint8_t ramsize_device;
+extern uint32_t reu_size;
+extern uint8_t sd2iec_device;
+extern uint8_t method;
+extern uint8_t cpu;
+extern uint8_t cpu_speed;
 
 #define BUFFER_SIZE (16*1024)
 
-extern unsigned char buffer[BUFFER_SIZE];
+extern uint8_t buffer[BUFFER_SIZE];
 extern unsigned char filename[];
-
-extern unsigned char drive_types[32];
 
 extern const char *help_screen;
 
 #define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
 #define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
 
-unsigned char backup(void);
-unsigned char backup_dos(void);
-unsigned char backup_reu(void);
-unsigned char backup_reu_dma(void);
-unsigned char backup_sd2iec(void);
-unsigned char detect(void);
-
+bool backup(void);
+bool backup_dos(void);
+bool backup_reu(void);
+bool backup_reu_dma(void);
+bool backup_sd2iec(void);
+bool detect(void);
+void detect_cpu(void);
 void help(void);
-unsigned char restore(void);
-unsigned char restore_dos(void);
-unsigned char restore_reu(void);
-unsigned char restore_reu_dma(void);
-unsigned char restore_sd2iec(void);
+bool restore(void);
+bool restore_dos(void);
+bool restore_reu(void);
+bool restore_reu_dma(void);
+bool restore_sd2iec(void);
 
 #endif /* HAD_TACHYON_H */

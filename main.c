@@ -44,13 +44,14 @@ int main(void) {
     while (1) {
         bgcolor(COLOR_BLACK);
         bordercolor(COLOR_BLACK);
+/*        bordercolor(COLOR_GRAY1); /* DEBUG */
         textcolor(COLOR_GRAY3);
         clrscr();
         textcolor(COLOR_WHITE);
-        printf("Tachyon RL - Back up RAMLink to Ultimate\n");
+        printf("Tachyon RL " VERSION " - RAMLink Backup\n");
         textcolor(COLOR_GRAY3);
         
-        if (detect() != 0) {
+        if (!detect()) {
             continue;
         }
         
@@ -71,8 +72,11 @@ int main(void) {
         else {
             printf("Restoring RAMLink.\n");
         }
-        string = ultimate_dos_copy_home_path(1);
-        printf("Current directory:\n  %s\n", string);
+        
+        if (dos) {
+            string = ultimate_dos_copy_home_path(1);
+            printf("Current directory:\n  %s\n", string);
+        }
         
         printf("Filename: ");
         fgets(filename, 256, stdin);
@@ -85,7 +89,7 @@ int main(void) {
             ret = backup();
             timer_stop();
             
-            if (ret == 0) {
+            if (ret) {
                 printf("Backup done in ");
                 timer_output();
                 printf("\n");
@@ -107,11 +111,10 @@ int main(void) {
             ret = restore();
             timer_stop();
             
-            if (ret == 0) {
+            if (ret) {
                 printf("Restore done in ");
                 timer_output();
                 printf("\n");
-                /* TODO: re-init RAMLink? power cycle? */
             }
             else {
                 printf("Restore failed.\n");

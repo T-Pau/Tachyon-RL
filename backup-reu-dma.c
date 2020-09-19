@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 
-unsigned char backup_reu_dma(void) {
+bool backup_reu_dma(void) {
     static unsigned int page;
     static unsigned int length;
     
@@ -53,11 +53,11 @@ unsigned char backup_reu_dma(void) {
 #if ENABLE_DOS
         if (ultimate_dos_save_reu(1, 0, length_bytes) != 0) {
             printf("\ncan't save REU:\n  %s\n", filename, ultimate_ci_status);
-            return 1;
+            return false;
         }
 #endif
         page += length;
     } while (page != ramlink_pages);
     
-    return 0;
+    return true;
 }

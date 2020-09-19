@@ -31,17 +31,20 @@
 
 #include <stdio.h>
 
-unsigned char backup(void) {
-    unsigned char ret;
+bool backup(void) {
+    bool ret;
+    
 #if ENABLE_DOS
-    if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
-        /* TODO: promt to overwrite if status == "file exists" */
-        printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
-        return 1;
+    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
+        if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
+            /* TODO: promt to overwrite if status == "file exists" */
+            printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
+            return false;
+        }
     }
 #endif
     
-    if (reu_size >= ramlink_size) {
+    if (reu_size > 0) {
         ret = backup_reu();
     }
     else {
@@ -49,7 +52,9 @@ unsigned char backup(void) {
     }
     
 #ifdef ENABLE_DOS
-    ultimate_dos_close_file(1);
+    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
+        ultimate_dos_close_file(1);
+    }
 #endif
 
     return ret;

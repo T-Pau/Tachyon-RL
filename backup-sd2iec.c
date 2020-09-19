@@ -33,13 +33,13 @@
 #include <conio.h>
 #include <stdio.h>
 
-unsigned char backup_sd2iec(void) {
+bool backup_sd2iec(void) {
     static unsigned long address;
     
     if (cbm_open(1, sd2iec_device, 1, filename) != 0) {
         printf("Can't open file.\n"); /* TODO: error message */
         cbm_close(1);
-        return 1;
+        return false;
     }
     
     printf("Saving RAMLink to disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
@@ -60,5 +60,5 @@ unsigned char backup_sd2iec(void) {
     
     cbm_close(1);
         
-    return 0;
+    return true;
 }

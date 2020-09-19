@@ -38,19 +38,24 @@
 #include "reu/reu.h"
 #include "ultimate/dos.h"
 
-unsigned char dos;
-unsigned long ramlink_size;
-unsigned char ramlink_device;
-unsigned long reu_size;
-unsigned char sd2iec_device;
+bool dos;
+uint32_t ramlink_size;
+uint8_t ramlink_device;
+uint32_t reu_size;
+uint8_t sd2iec_device;
+uint8_t cpu;
+uint8_t cpu_speed;
+uint8_t method;
 
-#define OK 0
-#define WARNING 1
-#define ERROR 2
+enum {
+    OK,
+    WARNING,
+    ERROR
+};
 
 static void print_size(unsigned long size);
 
-unsigned char detect(void) {
+bool detect(void) {
     const char *string;
     unsigned char state = OK;
     unsigned char key;
@@ -58,9 +63,10 @@ unsigned char detect(void) {
 
     ramlink_device = 0;
     sd2iec_device = 0;
+    method = METHOD_NONE;
 
     drive_detect();
-
+    
     for (i = 8; i < 32; ++i) {
         if (drive_types[i] == DRIVE_TYPE_RAMLINK) {
             ramlink_device = i;
@@ -70,6 +76,8 @@ unsigned char detect(void) {
             sd2iec_device = i;
         }
     }
+    
+    printf("\n");
 
     printf("RAMLink:  ");
 	if ((ramlink_size = ramlink_get_size()) == 0) {
@@ -90,6 +98,30 @@ unsigned char detect(void) {
         print_size(ramlink_size);
         printf("\n");
     }
+    textcolor(COLOR_GRAY3);
+    
+    detect_cpu();
+    printf("Computer: ");
+    textcolor(COLOR_LIGHTGREEN);
+    switch (cpu) {
+    case CPU_C64:
+        printf("C64");
+        break;
+        
+    case CPU_C128:
+        printf("C128");
+        break;
+        
+    case CPU_SUPERCPU_V1:
+    case CPU_SUPERCPU_V2:
+        if (cpu_speed == 1) {
+            textcolor(COLOR_YELLOW);
+            state = WARNING;
+        }
+        printf("SuperCPU V%c", cpu == CPU_SUPERCPU_V1 ? '1' : '2');
+        break;
+    }
+    printf(", %uMHz\n", cpu_speed);
     textcolor(COLOR_GRAY3);
 
 	printf("Ultimate: ");
@@ -115,6 +147,7 @@ unsigned char detect(void) {
         else {
             textcolor(COLOR_LIGHTGREEN);
             printf("#%u\n", sd2iec_device);
+            method = METHOD_SD2IEC;
         }
         textcolor(COLOR_GRAY3);
         printf("\n");
@@ -131,16 +164,17 @@ unsigned char detect(void) {
             if (state == OK) {
                 state = WARNING;
             }
+            method = METHOD_ULTIMATE;
         }
         else {
             textcolor(COLOR_LIGHTGREEN);
             print_size(reu_size);
             printf("\n");
+            method = METHOD_ULTIMATE_REU;
         }
         textcolor(COLOR_GRAY3);
     }
 
-    printf("\n");
 #if ENABLE_RAMLINK
     if (ramlink_size == 0) {
         /*      0123456789012345678901234567890123456789 */
@@ -148,6 +182,11 @@ unsigned char detect(void) {
         printf("connected and enabled.\n\n");
     }
 #endif
+    
+    if (cpu_speed == 1 && (cpu == CPU_SUPERCPU_V1 || cpu == CPU_SUPERCPU_V2)) {
+        /*      0123456789012345678901234567890123456789 */
+        printf("Set the speed of your SpuerCPU to Turbo.\n");
+    }
     
 #if ENABLE_DOS
     if (dos == 0) {
@@ -159,22 +198,19 @@ unsigned char detect(void) {
             printf("Please make sure your Ultimate is\n");
         }
         printf("connected to the Pass-Thru Port of your\n");
-        printf("RAMLink and that the Command Interface\n");
+        printf("RAMLink and the Command Interface is\n");
         /*      0123456789012345678901234567890123456789 */
-        printf("is enabled: Press the Menu button then\n");
-        printf("press F2. Select \"C64 and Cartridge\n");
-        printf("Settings\" and enable \"Command\n");
-        printf("Interface\".");
+        printf("enabled: Press the Menu button then F2.\n");
+        printf("Select \"C64 and Cartridge Settings\" and\n");
+        printf("enable \"Command Interface\".\n\n");
         /*      0123456789012345678901234567890123456789 */
         
         if (sd2iec_device == 0) {
-            printf(" Backing up to Ultimate is\n");
-            printf("much faster than to SD2IEC.\n\n");
             /*      0123456789012345678901234567890123456789 */
             printf("If you have an SD2IEC, make sure it is\n");
             printf("connected.\n\n");
             
-            textcolor(COLOR_WHITE);
+            textcolor(COLOR_LIGHTRED);
             printf("No suitable backup device found.\n\n");
             textcolor(COLOR_GRAY3);
         }
@@ -196,10 +232,12 @@ unsigned char detect(void) {
         /*      0123456789012345678901234567890123456789 */
     }
 #endif
+    
+    /* TODO: warn about 1Mhz SuperCPU. */
 
     switch (state) {
     case OK:
-        return 0;
+        return true;
         
     case WARNING:
         printf("(C)ontinue, (R)echeck, or (H)elp.\n");
@@ -207,7 +245,7 @@ unsigned char detect(void) {
             key = tolower(cgetc());
         } while (key != 'c' && key != 'r' && key != 'h');
         if (key == 'c') {
-            return 0;
+            return true;
         }
         break;
         
@@ -220,7 +258,7 @@ unsigned char detect(void) {
     if (key == 'h') {
         help();
     }
-    return 1;
+    return false;
 }
 
 

@@ -33,6 +33,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <c64.h>
+
 #include "drive/drive.h"
 #include "ramlink/ramlink.h"
 #include "reu/reu.h"
@@ -78,6 +80,14 @@ extern const char *help_screen;
 
 #define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
 #define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
+
+#define c128_1mhz() \
+    (*(uint8_t *)0xd030 = 0x0, \
+     VIC.ctrl1 = VIC.ctrl1 | 0x10)
+
+#define c128_2mhz() \
+    (VIC.ctrl1 = VIC.ctrl1 & 0xef, \
+     *(uint8_t *)0xd030 = 0x1)
 
 bool backup(void);
 bool backup_dos(void);

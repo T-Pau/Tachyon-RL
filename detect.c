@@ -132,7 +132,9 @@ bool detect(void) {
         }
         else {
             textcolor(COLOR_YELLOW);
-            state = WARNING;
+            if (state == OK) {
+                state = WARNING;
+            }
         }
 		printf("not found\n");
         dos = 0;
@@ -190,13 +192,8 @@ bool detect(void) {
     
 #if ENABLE_DOS
     if (dos == 0) {
-        if (sd2iec_device == 0) {
-            /*      0123456789012345678901234567890123456789 */
-            printf("If you have an Ultimate, make sure it is");
-        }
-        else {
-            printf("Please make sure your Ultimate is\n");
-        }
+        /*      0123456789012345678901234567890123456789 */
+        printf("If you have an Ultimate, make sure it is");
         printf("connected to the Pass-Thru Port of your\n");
         printf("RAMLink and the Command Interface is\n");
         /*      0123456789012345678901234567890123456789 */

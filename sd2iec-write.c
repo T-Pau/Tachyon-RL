@@ -13,17 +13,15 @@ int main(void) {
     static uint8_t i;
 
     timer_start();
-    cbm_k_setlfs(1, 10, 1);
-    cbm_k_setnam("test.dat");
-    cbm_k_open();
+    cbm_open(1, 10, 1, "test.dat");
     
     for (i=0; i < 64; i++) {
-        do_write(1, buffer, sizeof(buffer));
+        drive_write(1, buffer, sizeof(buffer));
         printf(".");
     }
     
     printf("\n");
-    cbm_k_close(1);
+    cbm_close(1);
     timer_stop();
     
     timer_output();

@@ -1,9 +1,8 @@
-;  ci-write.s -- Write request data.
+;  drive-write.s -- Write to open file.
 ;  Copyright (C) 2020 Dieter Baron
 ;
-;  This file is part of ultimate, a cc65 implementation of the
-;  Ultimate II command interface.
-;  The authors can be contacted at <ultimate@tpau.group>.
+;  This file is part of Tachyon RL, a backup program for your RAMLink.
+;  The authors can be contacted at <tachyon-rl@tpau.group>.
 ;
 ;  Redistribution and use in source and binary forms, with or without
 ;  modification, are permitted provided that the following conditions
@@ -31,13 +30,13 @@
 .autoimport on
 .importzp	sp
 .importzp	tmp1, tmp2, ptr1
-.export		_do_write
+.export		_drive_write
 
-; void __near__ do_write (unsigned char id, __near__ const unsigned char *, unsigned int)
+; void __near__ drive_write (unsigned char id, __near__ const unsigned char *, unsigned int)
 
 .segment	"CODE"
 
-.proc	_do_write: near
+.proc	_drive_write: near
 
 .segment	"CODE"
 

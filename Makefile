@@ -22,6 +22,7 @@ backup_SOURCES = \
 	backup-dos.c \
 	backup-reu.c \
 	backup-reu-dma.c \
+	backup-sd2iec.c \
 	buffer.c \
 	detect.c \
 	help.c \
@@ -76,6 +77,3 @@ rl-reu.prg: rl-reu.o ${LIBS}
 
 drives.prg: drives.o ${LIBS}
 	cl65 -t c64 -Ln drives.sym -o $@ $^
-
-sd2iec-write.prg: sd2iec-write.o do-write.o ${LIBS}
-	cl65 -t c64 -o $@ $^

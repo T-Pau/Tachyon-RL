@@ -1,8 +1,5 @@
-#ifndef HAD_TACHYON_H
-#define HAD_TACHYON_H
-
 /*
-  tachyon-rl.h -- Main header file.
+  backup-sd2iec.c -- Write to SD2Iec.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of Tachyon RL, a backup program for your RAMLink.
@@ -30,47 +27,38 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "drive/drive.h"
-#include "ramlink/ramlink.h"
-#include "reu/reu.h"
-#include "ultimate/ci.h"
-#include "ultimate/dos.h"
+#include "tachyon.h"
 
-/* disable operations for profiling */
-#define ENABLE_DOS 1
-#define ENABLE_RAMLINK 1
-#define ENABLE_REU 1
+#include <cbm.h>
+#include <conio.h>
+#include <stdio.h>
 
-extern unsigned char dos;
-extern unsigned long ramlink_size;
-extern unsigned char ramsize_device;
-extern unsigned long reu_size;
-extern unsigned char sd2iec_device;
-
-#define BUFFER_SIZE (16*1024)
-
-extern unsigned char buffer[BUFFER_SIZE];
-extern unsigned char filename[];
-
-extern unsigned char drive_types[32];
-
-extern const char *help_screen;
-
-#define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
-#define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
-
-unsigned char backup(void);
-unsigned char backup_dos(void);
-unsigned char backup_reu(void);
-unsigned char backup_reu_dma(void);
-unsigned char backup_sd2iec(void);
-unsigned char detect(void);
-
-void help(void);
-unsigned char restore(void);
-unsigned char restore_dos(void);
-unsigned char restore_reu(void);
-unsigned char restore_reu_dma(void);
-unsigned char restore_sd2iec(void);
-
-#endif /* HAD_TACHYON_H */
+unsigned char backup_sd2iec(void) {
+    static unsigned long address;
+    
+    if (cbm_open(1, sd2iec_device, 1, filename) != 0) {
+        printf("Can't open file.\n"); /* TODO: error message */
+        cbm_close(1);
+        return 1;
+    }
+    
+    printf("Saving RAMLink to disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
+    for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {
+        gotox(0);
+        printf("Saving RAMLink to disk: %3u", (unsigned int)(address>>16));
+#if ENABLE_RAMLINK
+        ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
+#endif
+#if ENABLE_DOS
+        drive_write(1, buffer, BUFFER_SIZE);
+        /* TODO: handle error */
+#endif
+    }
+    
+    gotox(0);
+    printf("Saving RAMLink to disk: %3u\n", (unsigned int)(address>>16));
+    
+    cbm_close(1);
+        
+    return 0;
+}

@@ -88,7 +88,8 @@
 		4BE318FF25139C6B00D92BEF /* ramlink-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ramlink-get-time.c"; sourceTree = "<group>"; };
 		4BE319002513A54900D92BEF /* dos-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-get-time.c"; sourceTree = "<group>"; };
 		4BE319012514AE6B00D92BEF /* sd2iec-write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "sd2iec-write.c"; sourceTree = "<group>"; };
-		4BE319022514AFC400D92BEF /* do-write.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "do-write.s"; sourceTree = "<group>"; };
+		4BE319022514AFC400D92BEF /* drive-write.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "drive-write.s"; sourceTree = "<group>"; };
+		4BE319032515412800D92BEF /* backup-sd2iec.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-sd2iec.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -193,10 +194,10 @@
 				4B33464B250B71DF00B7A144 /* backup-dos.c */,
 				4B33464A250B6D5C00B7A144 /* backup-reu-dma.c */,
 				4B334643250B6CD500B7A144 /* backup-reu.c */,
+				4BE319032515412800D92BEF /* backup-sd2iec.c */,
 				4B33464F250BB5B100B7A144 /* backup.c */,
 				4B33464D250B757A00B7A144 /* buffer.c */,
 				4B334648250B6CD500B7A144 /* detect.c */,
-				4BE319022514AFC400D92BEF /* do-write.s */,
 				4B334659251370CF00B7A144 /* drives.c */,
 				4B334640250B6CD500B7A144 /* filelist */,
 				4B334655250D6CD100B7A144 /* help_screen.s */,
@@ -223,6 +224,7 @@
 		4B33465E2514DB1400B7A144 /* drive */ = {
 			isa = PBXGroup;
 			children = (
+				4BE319022514AFC400D92BEF /* drive-write.s */,
 				4B3346612514DB1400B7A144 /* drive-command.c */,
 				4B3346632514E58200B7A144 /* drive-detect.c */,
 				4B3346622514E44F00B7A144 /* drive-identify.c */,

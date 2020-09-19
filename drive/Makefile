@@ -3,7 +3,8 @@ LIB=drive.lib
 SOURCES=\
 	drive-command.c \
 	drive-detect.c \
-	drive-identify.c
+	drive-identify.c \
+	drive-write.c
 
 TMP=${SOURCES:.c=.o}
 OBJECTS = ${TMP:.s=.o}

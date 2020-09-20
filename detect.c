@@ -96,7 +96,7 @@ bool detect(void) {
     }
     else {
         textcolor(COLOR_LIGHTGREEN);
-        printf("#%u, ", ramlink_device);
+        printf("Drive %u, ", ramlink_device);
         
         if ((ramlink_size = ramlink_get_size(ramlink_device)) == 0) {
             textcolor(COLOR_LIGHTRED);
@@ -159,7 +159,7 @@ bool detect(void) {
         }
         else {
             textcolor(COLOR_LIGHTGREEN);
-            printf("#%u\n", sd2iec_device);
+            printf("Drive %u\n", sd2iec_device);
             method = METHOD_SD2IEC;
         }
         textcolor(COLOR_GRAY3);
@@ -167,6 +167,7 @@ bool detect(void) {
     else {
         textcolor(COLOR_LIGHTGREEN);
     	printf("%s\n", string);
+        textcolor(COLOR_GRAY3);
         dos = 1;
         
         printf("REU:      ");
@@ -210,8 +211,9 @@ bool detect(void) {
     if (dos == 0) {
         /*      0123456789012345678901234567890123456789 */
         printf("If you have an Ultimate, connect it to\n");
-        printf("RAMLink's Pass-Thru Port and enable the\n");
-        printf("Command Interface in Menu -> F2 ->\n");
+        printf("RAMLink's Pass-Thru Port, set the lower\n");
+        printf("switch to \05normal\x9b, and enable the\n");
+        printf("\05Command Interface\x9b in Menu -> F2 ->\n");
         /*      0123456789012345678901234567890123456789 */
         printf("\"C64 and Cartridge Settings\".\n\n");
                
@@ -243,9 +245,9 @@ bool detect(void) {
     
     if (dos == 1 && reu_size == 0) {
         /*      0123456789012345678901234567890123456789 */
-        printf("For faster backup enable \"RAM Expansion");
-        printf("Unit in Menu -> F2 -> \"C64 and\n");
-        printf("Cartridge Settings\". Set \"REU Size\"\n");
+        printf("For faster backup enable \05RAM Expansion");
+        printf("Unit\x9b in Menu -> F2 -> \"C64 and\n");
+        printf("Cartridge Settings\". Set \05REU Size\x9b\n");
         /*      0123456789012345678901234567890123456789 */
         printf("to 16 MB.\n\n");
     }

@@ -1,5 +1,5 @@
 /*
-  backup.c -- Run backup.
+  restore-sd2iec.c -- Read from SD2IEC.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of Tachyon RL, a backup program for your RAMLink.
@@ -29,44 +29,43 @@
 
 #include "tachyon.h"
 
+#include <conio.h>
 #include <stdio.h>
 
-bool backup(void) {
-    bool ret;
+unsigned char restore_sd2iec(void) {
+    static unsigned long address;
     
+    printf("Not implemented yet.\n");
+    return false;
+    
+    if (cbm_open(1, sd2iec_device, 2, filename) != 0) {
+        printf("Can't open file.\n"); /* TODO: error message */
+        cbm_close(1);
+        return false;
+    }
+
+    printf("Loading RAMLink from disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
+    for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {
+        gotox(0);
+        printf("Loading RAMLink from disk: %3u\n", (unsigned int)(address>>16));
 #if ENABLE_DOS
-    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
-        if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_CREATE_NEW|ULTIMATE_DOS_OPEN_WRITE) != 0) {
-            /* TODO: promt to overwrite if status == "file exists" */
-            printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
-            return false;
-        }
-    }
+        drive_read(1, buffer, BUFFER_SIZE);
+        /* TODO: handle error */
 #endif
-    
-    switch (method) {
-        case METHOD_ULTIMATE:
-            ret = backup_dos();
-            break;
-            
-        case METHOD_ULTIMATE_REU:
-            ret = backup_reu();
-            break;
-
-        case METHOD_SD2IEC:
-            ret = backup_sd2iec();
-            break;
-            
-        default:
-            printf("Internal error: unknown backup method.\n");
-            ret = false;
+#if ENABLE_RAMLINK
+        ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_C64_TO_REU);
+#endif
     }
     
-#ifdef ENABLE_DOS
-    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
-        ultimate_dos_close_file(1);
+    gotox(0);
+    printf("Loading RAMLink from disk: %3u\n", (unsigned int)(address>>16));
+    
+    if (cbm_open(1, sd2iec_device, 1, filename) != 0) {
+        printf("Can't open file.\n"); /* TODO: error message */
+        cbm_close(1);
+        return false;
     }
-#endif
 
-    return ret;
+    return 0;
 }
+

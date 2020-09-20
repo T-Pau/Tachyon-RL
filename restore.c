@@ -36,35 +36,50 @@ unsigned char restore(void) {
     unsigned char ret;
     
 #if ENABLE_DOS
-    if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_READ) != 0) {
-        printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
-        return 1;
-    }
+    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
+        if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_READ) != 0) {
+            printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
+            return 1;
+        }
     
-    if ((file_info = ultimate_dos_file_info(1)) == NULL) {
-        printf("Can't get file info: %s\n", ultimate_ci_status);
-        return 1;
-    }
-
-    if (file_info->size < ramlink_size) {
-        printf("File is too short (%lud bytes)\n", file_info->size);
-        return 1;
-    }
-    else if (file_info->size > ramlink_size) {
-        printf("File is too long (%lud bytes)\n", file_info->size);
-        return 1;
+        if ((file_info = ultimate_dos_file_info(1)) == NULL) {
+            printf("Can't get file info: %s\n", ultimate_ci_status);
+            return 1;
+        }
+        
+        if (file_info->size < ramlink_size) {
+            printf("File is too short (%lud bytes)\n", file_info->size);
+            return 1;
+        }
+        else if (file_info->size > ramlink_size) {
+            printf("File is too long (%lud bytes)\n", file_info->size);
+            return 1;
+        }
     }
 #endif
     
-    if (reu_size >= ramlink_size) {
-        ret = restore_reu();
-    }
-    else {
-        ret = restore_dos();
+    switch (method) {
+        case METHOD_ULTIMATE:
+            ret = restore_dos();
+            break;
+            
+        case METHOD_ULTIMATE_REU:
+            ret = restore_reu();
+            break;
+
+        case METHOD_SD2IEC:
+            ret = restore_sd2iec();
+            break;
+            
+        default:
+            printf("Internal error: unknown backup method.\n");
+            ret = false;
     }
     
 #if ENABLE_DOS
-    ultimate_dos_close_file(1);
+    if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
+        ultimate_dos_close_file(1);
+    }
 #endif
     
     return ret;

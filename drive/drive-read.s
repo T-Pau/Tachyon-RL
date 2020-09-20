@@ -1,4 +1,4 @@
-;  drive-write.s -- Write to open file.
+;  drive-write.s -- Read from open file.
 ;  Copyright (C) 2020 Dieter Baron
 ;
 ;  This file is part of Tachyon RL, a backup program for your RAMLink.
@@ -30,64 +30,54 @@
 .autoimport on
 .importzp	sp
 .importzp	tmp1, tmp2, ptr1
-.import         __oserror
-.export		_drive_write
+.export		_drive_read
 
-; uint8_t __near__ drive_write (unsigned char id, __near__ const unsigned char *, unsigned int)
+; void __near__ drive_read (unsigned char id, __near__ unsigned char *, unsigned int)
 
 .segment	"CODE"
 
-.proc	_drive_write: near
+.proc	_drive_read: near
 
 .segment	"CODE"
 
 	sta tmp1
     stx tmp2
-	ldy #$00
+	ldy #$01
 	lda (sp),y
 	sta ptr1
 	iny
 	lda (sp),y
 	sta ptr1 + 1
-    iny
+    ldy #$00
     lda (sp),y
     tax
-    jsr CKOUT
-    bcc ok
-    jsr READST
-    sta __oserror
-    jmp return
-ok:
+    jsr CHKIN
     ldx tmp2
     ldy #$00
-write_page:
+read_page:
 	txa
-	beq write_rest
+	beq read_rest
 	dex
 loop_page:
-	lda (ptr1),y
-	jsr BSOUT
+    jsr BASIN
+    sta (ptr1),y
 	iny
 	bne loop_page
 	inc ptr1 + 1
-	jmp write_page
-write_rest:
+	jmp read_page
+read_rest:
 	lda tmp1
 	beq end
 	ldy #$00
 loop_rest:
-	lda (ptr1),y
-	jsr BSOUT
+	jsr BASIN
+    sta (ptr1),y
 	iny
 	cpy tmp1
 	bne loop_rest
 end:
     jsr CLRCH
-    lda #$01
-return:
-	jsr incsp3
-    ldx #$00
-    rts
+	jmp incsp3
 
 .endproc
 

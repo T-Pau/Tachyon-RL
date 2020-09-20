@@ -4,6 +4,7 @@ SOURCES=\
 	drive-command.c \
 	drive-detect.c \
 	drive-identify.c \
+	drive-read.c \
 	drive-write.c
 
 TMP=${SOURCES:.c=.o}

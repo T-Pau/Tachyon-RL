@@ -33,6 +33,7 @@ backup_SOURCES = \
 	restore-dos.c \
 	restore-reu.c \
 	restore-reu-dma.c \
+	restore-sd2iec.c \
 	speed-factor.c \
 	timer-cia.c
 

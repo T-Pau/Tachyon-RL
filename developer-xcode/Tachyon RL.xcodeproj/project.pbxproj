@@ -81,6 +81,9 @@
 		4B3346622514E44F00B7A144 /* drive-identify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-identify.c"; sourceTree = "<group>"; };
 		4B3346632514E58200B7A144 /* drive-detect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-detect.c"; sourceTree = "<group>"; };
 		4B33466425164AFA00B7A144 /* detect_cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = detect_cpu.c; sourceTree = "<group>"; };
+		4B33466625176B6100B7A144 /* clear-lines.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "clear-lines.c"; sourceTree = "<group>"; };
+		4B3346672517771E00B7A144 /* speed-factor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "speed-factor.c"; sourceTree = "<group>"; };
+		4B3346682517798C00B7A144 /* print-approximate-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "print-approximate-time.c"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 				4BE319032515412800D92BEF /* backup-sd2iec.c */,
 				4B33464F250BB5B100B7A144 /* backup.c */,
 				4B33464D250B757A00B7A144 /* buffer.c */,
+				4B33466625176B6100B7A144 /* clear-lines.c */,
 				4B33466425164AFA00B7A144 /* detect_cpu.c */,
 				4B334648250B6CD500B7A144 /* detect.c */,
 				4B334659251370CF00B7A144 /* drives.c */,
@@ -207,6 +211,7 @@
 				4B334645250B6CD500B7A144 /* main.c */,
 				4B334642250B6CD500B7A144 /* Makefile */,
 				4B33463D250B6CD500B7A144 /* mkd64 */,
+				4B3346682517798C00B7A144 /* print-approximate-time.c */,
 				4B9B7EFE250D2F0900DD3AFB /* read-test.c */,
 				4B334652250BB87700B7A144 /* restore-dos.c */,
 				4B33464C250B729600B7A144 /* restore-reu-dma.c */,
@@ -214,6 +219,7 @@
 				4B334650250BB72D00B7A144 /* restore.c */,
 				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
 				4BE319012514AE6B00D92BEF /* sd2iec-write.c */,
+				4B3346672517771E00B7A144 /* speed-factor.c */,
 				4B33463E250B6CD500B7A144 /* tachyon.h */,
 				4B33463C250B6CD500B7A144 /* timer-cia.c */,
 				4B334649250B6CD500B7A144 /* timer.h */,

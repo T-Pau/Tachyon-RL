@@ -71,12 +71,14 @@ extern uint8_t method;
 extern uint8_t cpu;
 extern uint8_t cpu_speed;
 
-#define BUFFER_SIZE (16*1024)
+extern uint8_t top_line;
 
+#define BUFFER_SIZE (16*1024)
 extern uint8_t buffer[BUFFER_SIZE];
 extern unsigned char filename[];
 
 extern const char *help_screen;
+extern uint16_t speed_factor[];
 
 #define ramlink_pages (*(unsigned int *)((unsigned char *)&ramlink_size + 1))
 #define reu_pages (*(unsigned int *)((unsigned char *)&reu_size + 1))
@@ -94,6 +96,7 @@ bool backup_dos(void);
 bool backup_reu(void);
 bool backup_reu_dma(void);
 bool backup_sd2iec(void);
+void clear_lines(uint8_t, uint8_t);
 bool detect(void);
 void detect_cpu(void);
 void help(void);

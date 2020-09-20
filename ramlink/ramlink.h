@@ -30,6 +30,8 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <stdbool.h>
+#include <stdint.h>
 #include <time.h>
 
 #include "../reu/reu.h"
@@ -96,8 +98,8 @@ typedef struct ramlink_partition_entry ramlink_partition_entry_t;
 void ramlink_reu_dma(unsigned char mode, unsigned int ramlink_page, unsigned int reu_page, unsigned int length);
 void ramlink_reu_copy(unsigned long ramlink_address, void *c64_address, unsigned int length, unsigned char mode);
 unsigned char ramlink_copy_block(unsigned char partition, unsigned char track, unsigned char sector, void *c64_address, unsigned char job);
-unsigned char ramlink_detect(void);
-unsigned long ramlink_get_size(void);
+bool ramlink_detect(void);
+unsigned long ramlink_get_size(uint8_t device_id);
 struct tm *ramlink_get_time(unsigned char device);
 
 #endif /* HAD_RAMLINK_H */

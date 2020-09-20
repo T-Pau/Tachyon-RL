@@ -36,7 +36,7 @@ static unsigned char signature[] = {
 	0x01, 0x01, 0xff, 0x00, 0x00, 0x53, 0x59, 0x53, 0x54, 0x45, 0x4d, 0xa0
 };
 
-unsigned long ramlink_get_size(void) {
+unsigned long ramlink_get_size(uint8_t device_id) {
 	unsigned char i = 0;
 	unsigned long size;
 
@@ -44,6 +44,8 @@ unsigned long ramlink_get_size(void) {
 		return 0;
 	}
 
+    /* TODO: use G-P<0> commnd instead of reading block */
+    
 	if (ramlink_copy_block(255, 1, 0, block, RAMLINK_JOB_READ) != 0) {
 		return 0;
 	}

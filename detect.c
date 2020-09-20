@@ -39,6 +39,7 @@
 #include "ultimate/dos.h"
 
 bool dos;
+bool ramlink;
 uint32_t ramlink_size;
 uint8_t ramlink_device;
 uint32_t reu_size;
@@ -46,6 +47,8 @@ uint8_t sd2iec_device;
 uint8_t cpu;
 uint8_t cpu_speed;
 uint8_t method;
+
+uint8_t top_line;
 
 enum {
     OK,
@@ -80,23 +83,31 @@ bool detect(void) {
     printf("\n");
 
     printf("RAMLink:  ");
-	if ((ramlink_size = ramlink_get_size()) == 0) {
+    ramlink = ramlink_detect();
+    if (!ramlink) {
         textcolor(COLOR_LIGHTRED);
-		printf("not found\n");
+        printf("not found\n");
         state = ERROR;
-	}
+    }
+    else if (ramlink_device == 0) {
+        textcolor(COLOR_LIGHTRED);
+        printf("device id not found\n");
+        state = ERROR;
+    }
     else {
-        if (ramlink_device == 0) {
-            textcolor(COLOR_YELLOW);
-            printf("device not found, ");
+        textcolor(COLOR_LIGHTGREEN);
+        printf("#%u, ", ramlink_device);
+        
+        if ((ramlink_size = ramlink_get_size(ramlink_device)) == 0) {
+            textcolor(COLOR_LIGHTRED);
+            printf("missing system partition\n");
+            state = ERROR;
         }
         else {
             textcolor(COLOR_LIGHTGREEN);
-            printf("#%u, ", ramlink_device);
+            print_size(ramlink_size);
+            printf("\n");
         }
-        textcolor(COLOR_LIGHTGREEN);
-        print_size(ramlink_size);
-        printf("\n");
     }
     textcolor(COLOR_GRAY3);
     
@@ -152,7 +163,6 @@ bool detect(void) {
             method = METHOD_SD2IEC;
         }
         textcolor(COLOR_GRAY3);
-        printf("\n");
 	}
     else {
         textcolor(COLOR_LIGHTGREEN);
@@ -176,68 +186,78 @@ bool detect(void) {
         }
         textcolor(COLOR_GRAY3);
     }
+    
+    printf("\n");
+    
+    top_line = wherey();
 
-#if ENABLE_RAMLINK
-    if (ramlink_size == 0) {
+    if (!ramlink) {
         /*      0123456789012345678901234567890123456789 */
         printf("Please make sure your RAMLink is\n");
         printf("connected and enabled.\n\n");
     }
-#endif
-    
+    else if (ramlink_size == 0) {
+        /*      0123456789012345678901234567890123456789 */
+        printf("Your RAMLink seems to be corrupted. Turn");
+        printf("off your computer and unplug RAMLink.\n\n");
+    }
+
     if (cpu_speed == 1 && (cpu == CPU_SUPERCPU_V1 || cpu == CPU_SUPERCPU_V2)) {
         /*      0123456789012345678901234567890123456789 */
         printf("Set the speed of your SpuerCPU to Turbo.\n");
     }
     
-#if ENABLE_DOS
     if (dos == 0) {
         /*      0123456789012345678901234567890123456789 */
-        printf("If you have an Ultimate, make sure it is");
-        printf("connected to the Pass-Thru Port of your\n");
-        printf("RAMLink and the Command Interface is\n");
+        printf("If you have an Ultimate, connect it to\n");
+        printf("RAMLink's Pass-Thru Port and enable the\n");
+        printf("Command Interface in Menu -> F2 ->\n");
         /*      0123456789012345678901234567890123456789 */
-        printf("enabled: Press the Menu button then F2.\n");
-        printf("Select \"C64 and Cartridge Settings\" and\n");
-        printf("enable \"Command Interface\".\n\n");
-        /*      0123456789012345678901234567890123456789 */
-        
+        printf("\"C64 and Cartridge Settings\".\n\n");
+               
         if (sd2iec_device == 0) {
             /*      0123456789012345678901234567890123456789 */
             printf("If you have an SD2IEC, make sure it is\n");
             printf("connected.\n\n");
-            
-            textcolor(COLOR_LIGHTRED);
-            printf("No suitable backup device found.\n\n");
-            textcolor(COLOR_GRAY3);
         }
         else {
             printf("\n\n");
         }
     }
-#endif
-#if ENABLE_REU
+    
+    if (!ramlink) {
+        textcolor(COLOR_LIGHTRED);
+        printf("No RAMLink found.\n\n");
+        textcolor(COLOR_GRAY3);
+    }
+    else if (ramlink_size == 0) {
+        textcolor(COLOR_LIGHTRED);
+        printf("RAMLink not accessible.\n\n");
+        textcolor(COLOR_GRAY3);
+    }
+    else if (method == METHOD_NONE) {
+        textcolor(COLOR_LIGHTRED);
+        printf("No suitable backup device found.\n\n");
+        textcolor(COLOR_GRAY3);
+    }
+    
     if (dos == 1 && reu_size == 0) {
         /*      0123456789012345678901234567890123456789 */
-        printf("Tachyon RL is much faster if it can\n");
-        printf("use the Ultimate's RAM Expansion Unit.\n");
-        printf("Press the Menu button, then F2. Select\n");
+        printf("For faster backup enable \"RAM Expansion");
+        printf("Unit in Menu -> F2 -> \"C64 and\n");
+        printf("Cartridge Settings\". Set \"REU Size\"\n");
         /*      0123456789012345678901234567890123456789 */
-        printf("\"C64 and Cartridge Settings\" and\n");
-        printf("enable \"RAM Expansion Unit\". A REU\n");
-        printf("Size of 16 MB is best.\n\n");
-        /*      0123456789012345678901234567890123456789 */
+        printf("to 16 MB.\n\n");
     }
-#endif
-    
-    /* TODO: warn about 1Mhz SuperCPU. */
 
+    gotoy(24);
+    
     switch (state) {
     case OK:
         return true;
         
     case WARNING:
-        printf("(C)ontinue, (R)echeck, or (H)elp.\n");
+        printf("(C)ontinue, (R)echeck, or (H)elp.");
         do {
             key = tolower(cgetc());
         } while (key != 'c' && key != 'r' && key != 'h');

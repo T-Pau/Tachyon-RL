@@ -37,9 +37,13 @@
 
 unsigned char filename[256];
 
+static void print_approximate_time(uint32_t ms);
+
+
 int main(void) {
 	const char *string;
 	unsigned int ret;
+    uint8_t speed_index;
 
     while (1) {
         bgcolor(COLOR_BLACK);
@@ -55,7 +59,42 @@ int main(void) {
             continue;
         }
         
-        printf("(B)ackup, (R)estore, or (H)elp.\n");
+        clear_lines(top_line, 25);
+        gotoxy(0, top_line);
+        
+        switch (method) {
+        case METHOD_ULTIMATE:
+            printf("Copying directly to/from Ultimate.\n");
+            break;
+            
+        case METHOD_ULTIMATE_REU:
+            printf("Copying to/from Ultimate via REU.\n");
+            break;
+            
+        case METHOD_SD2IEC:
+            printf("Copying to/from SD2IEC via serial bus.\n");
+            break;
+        }
+        
+        if (cpu_speed == 20) {
+            if (cpu == CPU_SUPERCPU_V1) {
+                speed_index = 2;
+            }
+            else {
+                speed_index = 3;
+            }
+        }
+        else {
+            speed_index = cpu_speed - 1;
+        }
+        speed_index += (method - 1) * 4;
+        
+        printf("It will take about ");
+        print_approximate_time((ramlink_size >> 16) * speed_factor[speed_index]);
+        printf(".\n");
+        
+        gotoxy(0, 24);
+        printf("(B)ackup, (R)estore, or (H)elp.");
         do {
             ret = tolower(cgetc());
         } while (ret != 'b' && ret != 'r' && ret != 'h');
@@ -64,7 +103,9 @@ int main(void) {
             help();
             continue;
         }
-        printf("\n");
+        
+        clear_lines(top_line + 3, 25);
+        gotoxy(0, top_line + 3);
 
         if (ret == 'b') {
             printf("Backing up RAMLink.\n");
@@ -121,9 +162,20 @@ int main(void) {
             }
         }
         
-        printf("Press any key to continue.\n");
+        gotoxy(0, 24);
+        printf("Press any key to continue.");
         cgetc();
     }
     
     return 0;
+}
+
+
+static void print_approximate_time(uint32_t ms) {
+    if (ms < 120000) {
+        printf("%lu seconds", (ms + 500) / 1000);
+    }
+    else {
+        printf("%lu minutes", (ms + 30000L) / 60000L);
+    }
 }

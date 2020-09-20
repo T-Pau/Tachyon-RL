@@ -24,6 +24,7 @@ backup_SOURCES = \
 	backup-reu-dma.c \
 	backup-sd2iec.c \
 	buffer.c \
+	clear-lines.c \
 	detect.c \
 	detect_cpu.c \
 	help.c \
@@ -32,6 +33,7 @@ backup_SOURCES = \
 	restore-dos.c \
 	restore-reu.c \
 	restore-reu-dma.c \
+	speed-factor.c \
 	timer-cia.c
 
 TMP=${backup_SOURCES:.c=.o}

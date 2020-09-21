@@ -26,7 +26,7 @@ int main(void) {
     }
     
     for (i=0; i < 1; i++) {
-        if (!drive_write(1, buffer, sizeof(buffer))) {
+        if (drive_write(1, buffer, sizeof(buffer)) != sizeof(buffer)) {
             printf("\nwrite error: %u.\n", _oserror);
             break;
         }

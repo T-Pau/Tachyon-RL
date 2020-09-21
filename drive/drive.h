@@ -23,7 +23,7 @@ extern uint8_t drive_types[32];
 const char *drive_command(uint8_t id, const char *command);
 void drive_detect(void);
 const char *drive_identify(uint8_t id);
-uint8_t drive_read(uint8_t id, const uint8_t *buffer, uint32_t length);
+uint16_t drive_read(uint8_t id, uint8_t *buffer, uint32_t length);
 uint16_t drive_write (uint8_t file, const uint8_t *data, uint16_t length);
 
 #endif /* HAD_DRIVE_H */

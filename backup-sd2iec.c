@@ -36,11 +36,13 @@
 bool backup_sd2iec(void) {
     static unsigned long address;
     
+#if ENABLE_DOS
     if (cbm_open(1, sd2iec_device, 1, filename) != 0) {
         printf("Can't open file.\n"); /* TODO: error message */
         cbm_close(1);
         return false;
     }
+#endif
     
     printf("Saving RAMLink to disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
     for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {
@@ -50,15 +52,21 @@ bool backup_sd2iec(void) {
         ramlink_reu_copy(address, buffer, BUFFER_SIZE, REU_COMMAND_REU_TO_C64);
 #endif
 #if ENABLE_DOS
-        drive_write(1, buffer, BUFFER_SIZE);
-        /* TODO: handle error */
+        if (drive_write(1, buffer, BUFFER_SIZE) != BUFFER_SIZE) {
+            printf("\nWrite error.\n"); /* TODO: error detail */
+            cbm_close(1);
+            return false;
+        }
+
 #endif
     }
     
     gotox(0);
     printf("Saving RAMLink to disk: %3u\n", (unsigned int)(address>>16));
     
+#if ENABLE_DOS
     cbm_close(1);
+#endif
         
     return true;
 }

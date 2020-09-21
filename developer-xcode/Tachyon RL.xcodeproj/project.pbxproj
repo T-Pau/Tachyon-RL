@@ -62,7 +62,7 @@
 		4B334640250B6CD500B7A144 /* filelist */ = {isa = PBXFileReference; lastKnownFileType = text; path = filelist; sourceTree = "<group>"; };
 		4B334642250B6CD500B7A144 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		4B334643250B6CD500B7A144 /* backup-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-reu.c"; sourceTree = "<group>"; };
-		4B334645250B6CD500B7A144 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		4B334645250B6CD500B7A144 /* tachyon-rl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "tachyon-rl.c"; sourceTree = "<group>"; };
 		4B334648250B6CD500B7A144 /* detect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = detect.c; sourceTree = "<group>"; };
 		4B334649250B6CD500B7A144 /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		4B33464A250B6D5C00B7A144 /* backup-reu-dma.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "backup-reu-dma.c"; sourceTree = "<group>"; };
@@ -212,7 +212,6 @@
 				4B334640250B6CD500B7A144 /* filelist */,
 				4B334655250D6CD100B7A144 /* help_screen.s */,
 				4B334654250D6A8600B7A144 /* help.c */,
-				4B334645250B6CD500B7A144 /* main.c */,
 				4B334642250B6CD500B7A144 /* Makefile */,
 				4B33463D250B6CD500B7A144 /* mkd64 */,
 				4B3346682517798C00B7A144 /* print-approximate-time.c */,
@@ -225,6 +224,7 @@
 				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
 				4BE319012514AE6B00D92BEF /* sd2iec-write.c */,
 				4B3346672517771E00B7A144 /* speed-factor.c */,
+				4B334645250B6CD500B7A144 /* tachyon-rl.c */,
 				4B33463E250B6CD500B7A144 /* tachyon.h */,
 				4B33463C250B6CD500B7A144 /* timer-cia.c */,
 				4B334649250B6CD500B7A144 /* timer.h */,

@@ -1,5 +1,8 @@
 LIB=drive.lib
 
+CC = cl65
+CFLAGS = -t c64 -O -g
+
 SOURCES=\
 	drive-command.c \
 	drive-detect.c \
@@ -7,18 +10,29 @@ SOURCES=\
 	drive-read.c \
 	drive-write.c
 
+all: ${LIB}
+
 TMP=${SOURCES:.c=.o}
 OBJECTS = ${TMP:.s=.o}
+DEPFILES = ${OBJECTS:.o=.d}
 
-all: ${LIB}
+clean:
+	rm -f ${OBJECTS} ${DEPFILES} ${LIB}
+
+.PHONY: all clean
 
 .SUFFIXES: .c .s .o
 
 .c.o:
-	cl65 -t c64 -c -O -g -o $@ $<
+	@echo Compiling $<
+	@${CC} ${CFLAGS} --create-dep $(<:.c=.d) -c -o $@ $<
 
 .s.o:
-	cl65 -t c64 -c -g -o $@ $<
+	@echo Compiling $<
+	@${CC} ${CFLAGS} -c -o $@ $<
 
 ${LIB}: ${OBJECTS}
-	ar65 r ${LIB} ${OBJECTS}
+	@echo Linking $@
+	@ar65 r ${LIB} ${OBJECTS}
+
+-include ${DEPFILES}

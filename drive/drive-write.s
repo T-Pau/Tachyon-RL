@@ -29,65 +29,92 @@
 
 .autoimport on
 .importzp	sp
-.importzp	tmp1, tmp2, ptr1
-.import         __oserror
+.importzp	ptr1, ptr2
+.import     __oserror
 .export		_drive_write
 
-; uint8_t __near__ drive_write (unsigned char id, __near__ const unsigned char *, unsigned int)
+; uint16_t drive_write (uint8_t file, const uint8_t *data, uint16_t length);
 
 .segment	"CODE"
 
 .proc	_drive_write: near
 
-.segment	"CODE"
+; Set up for copy:
+;   put end address in ptr2
+;   put current page in x and ptr1 (low byte always 0)
+;   put current offset in page in y
+;   select file for output
+        sta ptr2
+        stx ptr2 + 1
+        ldy #$00
+        lda (sp),y
+        sta ptr1
+        clc
+        adc ptr2
+        sta ptr2
+        iny
+        lda (sp),y
+        sta ptr1 + 1
+        adc ptr2 + 1
+        sta ptr2 + 1
+        iny
+        lda (sp),y
+        tax
+        jsr CKOUT
+        ldy ptr1
+        bcs end ; TODO: set error
+        lda #$00
+        sta ptr1
+        ldx ptr1 + 1
 
-	sta tmp1
-    stx tmp2
-	ldy #$00
-	lda (sp),y
-	sta ptr1
-	iny
-	lda (sp),y
-	sta ptr1 + 1
+; write until end of page, unless we're at last page
+write_page:
+        cpx ptr2 + 1
+        beq write_rest
+loop_page:
+        lda (ptr1),y
+        jsr BSOUT
+        ; TODO: handle error
+        iny
+        bne loop_page
+        inx
+        stx ptr1 + 1
+        jmp write_page
+
+; write incomplete last page
+write_rest:
+        lda ptr2
+        beq end
+loop_rest:
+        lda (ptr1),y
+        jsr BSOUT
+        ; handle error
+        iny
+        cpy ptr2
+        bne loop_rest
+
+end:
+; remember end position and restore default output device
+    sty ptr1
+    jsr CLRCH
+
+; calculate and return number of bytes copied
+    ldy #0
+    lda (sp),y
+    sta ptr2
     iny
     lda (sp),y
-    tax
-    jsr CKOUT
-    bcc ok
-    jsr READST
-    sta __oserror
-    jmp return
-ok:
-    ldx tmp2
-    ldy #$00
-write_page:
-	txa
-	beq write_rest
-	dex
-loop_page:
-	lda (ptr1),y
-	jsr BSOUT
-	iny
-	bne loop_page
-	inc ptr1 + 1
-	jmp write_page
-write_rest:
-	lda tmp1
-	beq end
-	ldy #$00
-loop_rest:
-	lda (ptr1),y
-	jsr BSOUT
-	iny
-	cpy tmp1
-	bne loop_rest
-end:
-    jsr CLRCH
-    lda #$01
-return:
+    sta ptr2 + 1
 	jsr incsp3
-    ldx #$00
+
+    sec
+    lda ptr1
+    sbc ptr2
+    tay
+    lda ptr1 + 1
+    sbc ptr2 + 1
+    tax
+    tya
     rts
 
 .endproc
-

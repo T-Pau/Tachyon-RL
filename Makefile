@@ -4,11 +4,11 @@ DISK=Tachyon-RL.d64
 
 VERSION=1.0.1
 
+CC = cl65
+CFLAGS = -t c64 -O -g
+
 PROGRAMS=\
-	tachyon-rl.prg \
-	read-test.prg \
-	rl-reu.prg \
-	write-test.prg
+	tachyon-rl.prg
 
 LIBS = \
 	tachyon.lib \
@@ -17,7 +17,7 @@ LIBS = \
 	reu/reu.lib \
 	ultimate/ultimate.lib
 
-backup_SOURCES = \
+lib_SOURCES = \
 	backup.c \
 	backup-dos.c \
 	backup-reu.c \
@@ -37,15 +37,31 @@ backup_SOURCES = \
 	speed-factor.c \
 	timer-cia.c
 
-TMP=${backup_SOURCES:.c=.o}
-backup_OBJECTS = ${TMP:.s=.o}
+prg_SOURCES = \
+	tachyon-rl.c \
+	drives.c \
+	read-test.c \
+	sd2iec-write.c \
+	write-test.c
+
+TMP=${lib_SOURCES:.c=.o}
+lib_OBJECTS = ${TMP:.s=.o}
+
+DEPFILES = ${lib_OBJECTS:.o=.d} ${prg_SOURCES:.c=.d}
+
+.PHONY: all clean dist subdirs
 
 all: subdirs ${DISK}
 
 dist: all
 	zip -9rq Tachyon-RL-${VERSION}.zip README.md Tachyon-RL.d64 tachyon-rl.prg
 
-.PHONY: subdirs
+clean:
+	rm -f ${lib_OBJECTS} ${prg_SOURCES:.c=.prg} ${prg_SOURCES:.c=.o} ${DEPFILES}
+	@for dir in ${SUBDIRS}; \
+	do \
+		(cd $$dir && make clean) || exit 1; \
+	done
 
 subdirs:
 	@for dir in ${SUBDIRS}; \
@@ -56,28 +72,36 @@ subdirs:
 ${DISK}: ${PROGRAMS} mkd64 filelist
 	./mkd64 ${DISK} "tachyon rl,00" filelist
 
-.SUFFIXES: .c .s .o
+.SUFFIXES: .c .s .o .prg .d64
 
 .c.o:
-	cl65 -t c64 -c -O -g -o $@ $<
+	@echo Compiling $<
+	@${CC} ${CFLAGS} --create-dep $(<:.c=.d) -c -o $@ $<
 
 .s.o:
-	cl65 -t c64 -c -g -o $@ $<
+	@echo Compiling $<
+	@${CC} ${CFLAGS} -c -o $@ $<
+	
+.o.prg:
+	@echo Linking $@
+	@${CC} ${CFLAGS} -o $@ $< ${LIBS}
 
-tachyon.lib: ${backup_OBJECTS}
-	ar65 r $@ ${backup_OBJECTS}
+.prg.d64:
+	prg2d64 $<
 
-tachyon-rl.prg: main.o ${LIBS}
-	cl65 -t c64 -o $@ main.o ${LIBS}
+tachyon.lib: ${lib_OBJECTS}
+	@echo Linking $@
+	@ar65 r $@ ${lib_OBJECTS}
+
+tachyon-rl.prg: tachyon-rl.o ${LIBS}
 
 read-test.prg: read-test.o ${LIBS}
-	cl65 -t c64 -o $@ read-test.o ${LIBS}
-
 write-test.prg: write-test.o ${LIBS}
-	cl65 -t c64 -o $@ write-test.o ${LIBS}
-
 rl-reu.prg: rl-reu.o ${LIBS}
-	cl65 -t c64 -o $@ rl-reu.o ${LIBS}
-
 drives.prg: drives.o ${LIBS}
-	cl65 -t c64 -Ln drives.sym -o $@ $^
+
+sd2iec-write.prg: sd2iec-write.o ${LIBS}
+	@echo Linking $@
+	@${CC} ${CFLAGS} -Ln sym -o $@ $< ${LIBS}
+
+-include ${DEPFILES}

@@ -6,6 +6,7 @@
 #include "drive/drive.h"
 #include "timer.h"
 
+#define DEVICE 8
 
 uint8_t buffer[16*1024];
 
@@ -19,8 +20,9 @@ int main(void) {
     }
 
     timer_start();
-    if (cbm_open(1, 9, 1, "test.dat") != 0) {
+    if (cbm_open(1, DEVICE, 1, "test.dat") != 0) {
         printf("can't open file: %u.\n", _oserror);
+        return 1;
     }
     
     for (i=0; i < 1; i++) {

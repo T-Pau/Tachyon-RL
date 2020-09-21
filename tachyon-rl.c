@@ -1,5 +1,5 @@
 /*
-  main.c -- Main program.
+  tachyon-rl.c -- Main program.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of Tachyon RL, a backup program for your RAMLink.

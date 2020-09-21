@@ -200,7 +200,6 @@
 		4B33462F250B695E00B7A144 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4B348FFD2518D85F008C7792 /* sd2iec-read.c */,
 				4B33464B250B71DF00B7A144 /* backup-dos.c */,
 				4B33464A250B6D5C00B7A144 /* backup-reu-dma.c */,
 				4B334643250B6CD500B7A144 /* backup-reu.c */,
@@ -224,6 +223,7 @@
 				4B11AC2A2517AC6F00E9ACFA /* restore-sd2iec.c */,
 				4B334650250BB72D00B7A144 /* restore.c */,
 				4B9B7EFD250BA36000DD3AFB /* rl-reu.c */,
+				4B348FFD2518D85F008C7792 /* sd2iec-read.c */,
 				4BE319012514AE6B00D92BEF /* sd2iec-write.c */,
 				4B3346672517771E00B7A144 /* speed-factor.c */,
 				4B334645250B6CD500B7A144 /* tachyon-rl.c */,

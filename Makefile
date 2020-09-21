@@ -104,4 +104,8 @@ sd2iec-write.prg: sd2iec-write.o ${LIBS}
 	@echo Linking $@
 	@${CC} ${CFLAGS} -Ln sym -o $@ $< ${LIBS}
 
+sd2iec-read.prg: sd2iec-read.o ${LIBS}
+	@echo Linking $@
+	@${CC} ${CFLAGS} -Ln sym -o $@ $< ${LIBS}
+
 -include ${DEPFILES}

@@ -44,7 +44,7 @@ unsigned char restore_sd2iec(void) {
         cbm_close(1);
         return false;
     }
-#ENDIF
+#endif
 
     printf("Loading RAMLink from disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
     for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {

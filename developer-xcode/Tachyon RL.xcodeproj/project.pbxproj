@@ -87,6 +87,7 @@
 		4B33466625176B6100B7A144 /* clear-lines.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "clear-lines.c"; sourceTree = "<group>"; };
 		4B3346672517771E00B7A144 /* speed-factor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "speed-factor.c"; sourceTree = "<group>"; };
 		4B3346682517798C00B7A144 /* print-approximate-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "print-approximate-time.c"; sourceTree = "<group>"; };
+		4B348FFD2518D85F008C7792 /* sd2iec-read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "sd2iec-read.c"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		4B33462F250B695E00B7A144 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4B348FFD2518D85F008C7792 /* sd2iec-read.c */,
 				4B33464B250B71DF00B7A144 /* backup-dos.c */,
 				4B33464A250B6D5C00B7A144 /* backup-reu-dma.c */,
 				4B334643250B6CD500B7A144 /* backup-reu.c */,

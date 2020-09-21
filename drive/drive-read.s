@@ -85,9 +85,9 @@ read_page:
 read_rest:
         lda ptr2
         beq end
+loop_rest:
         jsr BASIN
         ; handle error
-        loop_rest:
         sta (ptr1),y
         iny
         cpy ptr2

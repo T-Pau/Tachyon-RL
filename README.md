@@ -11,9 +11,9 @@ Approximate time for backup or restore for 16 MB RAMLink (proportionally shorter
 
 | Method | C64 | SuperCPU V1 | SuperCPU V2 |
 |:-:|:-:|:-:|:-:|
-| Ultimate with REU | 8 min | 75 s | 60 s |
-| Ultimate without REU | 17 min | 7 min | |
-| SD2IEC | 72 min | 64 min | |
+| Ultimate with REU | 8 min | 75 s | 55 s |
+| Ultimate without REU | 17 min | 7 min | 5 min |
+| SD2IEC | 72 min | 64 min | 60 min |
 
 ## Using
 

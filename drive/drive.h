@@ -45,6 +45,7 @@
 #define DRIVE_TYPE_SD2IEC 9
 #define DRIVE_TYPE_IDE64 10
 #define DRIVE_TYPE_IDESERV 11
+#define DRIVE_TYPE_NLQ_HD 12
 #define DRIVE_TYPE_UNKNOWN 127
 
 extern uint8_t drive_types[32];

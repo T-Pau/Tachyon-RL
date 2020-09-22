@@ -43,7 +43,8 @@ static struct pattern prefix[] = {
     { DRIVE_TYPE_RAMDRIVE, 6, "cmd rd" },
     { DRIVE_TYPE_RAMLINK, 6, "cmd rl" },
     { DRIVE_TYPE_SD2IEC, 6, "sd2iec" },
-    { DRIVE_TYPE_IDESERV, 6, " idese" }
+    { DRIVE_TYPE_IDESERV, 6, " idese" },
+    { DRIVE_TYPE_NLQ_HD, 5, "nlqhd" }
 };
 
 static struct pattern suffix[] = {

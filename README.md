@@ -10,9 +10,9 @@ CMD SuperCPU provides an additional speed boost.
 Approximate time for backup or restore for 16 MB RAMLink (proportionally shorter for smaller size):
 
 | Method | C64 | SuperCPU V1 | SuperCPU V2 |
-|:-:|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-:|:-:|
 | Ultimate with REU | 8 min | 75 s | 60 s |
-| Ultimate without REU| 17 min | 7 min | |
+| Ultimate without REU | 17 min | 7 min | |
 | SD2IEC | 72 min | 64 min | |
 
 ## Using

@@ -245,9 +245,9 @@ bool detect(void) {
     
     if (dos == 1 && reu_size == 0) {
         /*      0123456789012345678901234567890123456789 */
-        printf("For faster backup enable \05RAM Expansion");
+        printf("For faster backup enable \05RAM Expansion\n");
         printf("Unit\x9b in Menu -> F2 -> \"C64 and\n");
-        printf("Cartridge Settings\". Set \05REU Size\x9b\n");
+        printf("Cartridge Settings\". Set REU Size\n");
         /*      0123456789012345678901234567890123456789 */
         printf("to 16 MB.\n\n");
     }

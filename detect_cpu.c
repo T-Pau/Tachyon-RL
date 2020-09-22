@@ -47,10 +47,12 @@ void detect_cpu(void) {
             cpu_speed = 20;
         }
     }
+#if 0
     else if (*(uint8_t *)0xd030 == 0xfc) {
         cpu = CPU_C128;
         cpu_speed = 2;
     }
+#endif
     else {
         cpu = CPU_C64;
         cpu_speed = 1;

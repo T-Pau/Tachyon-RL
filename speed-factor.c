@@ -34,17 +34,17 @@ uint16_t speed_factor[] = { /* ms/64k */
     3831, /* 1Mhz */
     0, /* 2Mhz */
     1488, /* SuperCPU V1 20Mhz */
-    0, /* SuperCPU V2 20Mhz */
+    1250, /* SuperCPU V2 20Mhz */
 
     /* Ultimate + REU */
     1756, /* 1Mhz */
     0, /* 2Mhz */
     0281, /* SuperCPU V1 20Mhz */
-    0234, /* SuperCPU V2 20Mhz */
+    0213, /* SuperCPU V2 20Mhz */
 
     /* SD2IEC */
     16963, /* 1Mhz */
     0, /* 2Mhz */
     14163, /* SuperCPU V1 20Mhz */
-    0, /* SuperCPU V2 20Mhz */
+    14069, /* SuperCPU V2 20Mhz */
 };

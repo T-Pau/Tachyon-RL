@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 
-unsigned char restore_reu_dma(void) {
+bool restore_reu_dma(void) {
     static unsigned int page;
     static unsigned int length;
     
@@ -46,7 +46,7 @@ unsigned char restore_reu_dma(void) {
 #if ENABLE_DOS
         if (ultimate_dos_load_reu(1, 0, length) != 0) {
             printf("Can't load REU:\n  %s\n", filename, ultimate_ci_status);
-            return 1;
+            return false;
         }
 #endif
 
@@ -57,5 +57,5 @@ unsigned char restore_reu_dma(void) {
         page += length;
     } while (page != ramlink_pages);
     
-    return 0;
+    return true;
 }

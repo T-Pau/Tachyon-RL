@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 
-unsigned char restore(void) {
+bool restore(void) {
     const ultimate_dos_file_info_t *file_info;
     unsigned char ret;
     
@@ -39,21 +39,21 @@ unsigned char restore(void) {
     if (method == METHOD_ULTIMATE_REU || method == METHOD_ULTIMATE) {
         if (ultimate_dos_open_file(1, filename, ULTIMATE_DOS_OPEN_READ) != 0) {
             printf("Can't open '%s':\n  %s\n", filename, ultimate_ci_status);
-            return 1;
+            return false;
         }
     
         if ((file_info = ultimate_dos_file_info(1)) == NULL) {
             printf("Can't get file info: %s\n", ultimate_ci_status);
-            return 1;
+            return false;
         }
         
         if (file_info->size < ramlink_size) {
             printf("File is too short (%lud bytes)\n", file_info->size);
-            return 1;
+            return false;
         }
         else if (file_info->size > ramlink_size) {
             printf("File is too long (%lud bytes)\n", file_info->size);
-            return 1;
+            return false;
         }
     }
 #endif

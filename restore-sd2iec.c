@@ -32,7 +32,7 @@
 #include <conio.h>
 #include <stdio.h>
 
-unsigned char restore_sd2iec(void) {
+bool restore_sd2iec(void) {
     static unsigned long address;
     
     printf("Not implemented yet.\n");
@@ -69,6 +69,6 @@ unsigned char restore_sd2iec(void) {
     cbm_close(1);
 #endif
 
-    return 0;
+    return true;
 }
 

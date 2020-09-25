@@ -32,7 +32,7 @@
 #include <conio.h>
 #include <stdio.h>
 
-unsigned char restore_reu(void) {
+bool restore_reu(void) {
     static unsigned long address;
     
     printf("Loading REU.\n");
@@ -40,7 +40,7 @@ unsigned char restore_reu(void) {
 #if ENABLE_DOS
     if (ultimate_dos_load_reu(1, 0, ramlink_size) != NULL) {
         printf("Can't load REU: %s\n", ultimate_ci_status);
-        return 1;
+        return false;
     }
 #endif
     
@@ -58,5 +58,5 @@ unsigned char restore_reu(void) {
     gotox(0);
     printf("Copying REU to RAMLink: %3u\n", (unsigned int)(address>>16));
     
-    return 0;
+    return true;
 }

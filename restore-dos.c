@@ -32,7 +32,7 @@
 #include <conio.h>
 #include <stdio.h>
 
-unsigned char restore_dos(void) {
+bool restore_dos(void) {
     static unsigned long address;
     
     printf("Loading RAMLink from disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
@@ -42,7 +42,7 @@ unsigned char restore_dos(void) {
 #if ENABLE_DOS
         if (ultimate_dos_read_data(1, buffer, BUFFER_SIZE) != BUFFER_SIZE) {
             printf("Read error: %s\n", ultimate_ci_status);
-            return 1;
+            return false;
         }
 #endif
 #if ENABLE_RAMLINK
@@ -53,5 +53,5 @@ unsigned char restore_dos(void) {
     gotox(0);
     printf("Loading RAMLink from disk: %3u\n", (unsigned int)(address>>16));
     
-    return 0;
+    return true;
 }

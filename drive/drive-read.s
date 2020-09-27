@@ -73,8 +73,9 @@ read_page:
         beq read_rest
         loop_page:
         jsr BASIN
-        ; TODO: handle error
         sta (ptr1),y
+        lda $90 ; jsr READST ; TODO: assumes serial device
+        bne end
         iny
         bne loop_page
         inx

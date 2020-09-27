@@ -1,5 +1,5 @@
 /*
-  ramlink-get-time.h -- Get date and time.
+  drive-set-time.h -- Set date and time.
   Copyright (C) 2020 Dieter Baron
 
   This file is part of Tachyon RL, a backup program for your RAMLink.
@@ -27,35 +27,56 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "ramlink.h"
+#include "drive.h"
 
 #include <cbm.h>
+#include <errno.h>
 
-struct tm *ramlink_get_time(unsigned char device) {
-    static struct tm tm;
+bool drive_set_time(uint8_t device, const struct tm *tm) {
+    static uint8_t i;
+
+    if (cbm_open(15, device, 15, "") != 0) {
+        i = _oserror;
+        cbm_close(15);
+        _oserror = i;
+        return false;
+    }
     
-    cbm_k_setlfs(15, device, 15);
-    cbm_k_setnam("t-rd\r");
-    cbm_k_open();
-    cbm_k_chkin(15);
+    if ((i = cbm_k_ckout(15)) != 0) {
+        cbm_close(15);
+        _oserror = i;
+        return false;
+    }
 
-    tm.tm_wday = cbm_k_basin();
-    tm.tm_year = cbm_k_basin();
-    if (tm.tm_year < 70) {
-        tm.tm_year += 100;
+    cbm_k_bsout(tm->tm_wday);
+    cbm_k_bsout(tm->tm_wday);
+    if (tm->tm_year > 100) {
+        cbm_k_bsout(tm->tm_year - 100);
     }
-    tm.tm_mon = cbm_k_basin() - 1;
-    tm.tm_mday = cbm_k_basin();
-    tm.tm_hour = cbm_k_basin();
-    tm.tm_min = cbm_k_basin();
-    tm.tm_sec = cbm_k_basin();
-    if (cbm_k_basin()) {
-        tm.tm_hour += 12;
+    else {
+        cbm_k_bsout(tm->tm_year);
     }
+    cbm_k_bsout(tm->tm_mon + 1);
+    cbm_k_bsout(tm->tm_mday);
+    if (tm->tm_hour >= 12) {
+        cbm_k_bsout(tm->tm_hour - 12);
+    }
+    else {
+        cbm_k_bsout(tm->tm_hour);
+    }
+    cbm_k_bsout(tm->tm_min);
+    cbm_k_bsout(tm->tm_sec);
+    if (tm->tm_hour >= 12) {
+        cbm_k_bsout(1);
+    }
+    else {
+        cbm_k_bsout(0);
+    }
+    
+    /* TODO: handle error */
     
     cbm_k_clrch();
     cbm_k_close(15);
 
-    return &tm;
+    return true;
 }
-

@@ -88,12 +88,13 @@
 		4B3346672517771E00B7A144 /* speed-factor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "speed-factor.c"; sourceTree = "<group>"; };
 		4B3346682517798C00B7A144 /* print-approximate-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "print-approximate-time.c"; sourceTree = "<group>"; };
 		4B348FFD2518D85F008C7792 /* sd2iec-read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "sd2iec-read.c"; sourceTree = "<group>"; };
+		4B348FFE2520C819008C7792 /* drive-set-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-set-time.c"; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		4BE318FD251320AB00D92BEF /* NEWS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NEWS.md; sourceTree = "<group>"; };
-		4BE318FF25139C6B00D92BEF /* ramlink-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ramlink-get-time.c"; sourceTree = "<group>"; };
+		4BE318FF25139C6B00D92BEF /* drive-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-get-time.c"; sourceTree = "<group>"; };
 		4BE319002513A54900D92BEF /* dos-get-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "dos-get-time.c"; sourceTree = "<group>"; };
 		4BE319012514AE6B00D92BEF /* sd2iec-write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "sd2iec-write.c"; sourceTree = "<group>"; };
 		4BE319022514AFC400D92BEF /* drive-write.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "drive-write.s"; sourceTree = "<group>"; };
@@ -179,7 +180,6 @@
 				4B33461E250B690500B7A144 /* ramlink-get-size.c */,
 				4B334623250B690500B7A144 /* ramlink-reu-dma.c */,
 				4B33461B250B690500B7A144 /* ramlink.h */,
-				4BE318FF25139C6B00D92BEF /* ramlink-get-time.c */,
 			);
 			name = ramlink;
 			path = ../ramlink;
@@ -244,6 +244,8 @@
 				4B3346612514DB1400B7A144 /* drive-command.c */,
 				4B3346632514E58200B7A144 /* drive-detect.c */,
 				4B3346622514E44F00B7A144 /* drive-identify.c */,
+				4BE318FF25139C6B00D92BEF /* drive-get-time.c */,
+				4B348FFE2520C819008C7792 /* drive-set-time.c */,
 				4B3346602514DB1400B7A144 /* drive.h */,
 				4B33465F2514DB1400B7A144 /* Makefile */,
 			);

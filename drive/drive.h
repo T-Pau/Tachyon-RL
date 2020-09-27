@@ -32,6 +32,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <time.h>
 
 #define DRIVE_TYPE_NONE 0
 #define DRIVE_TYPE_1541 1
@@ -52,6 +53,8 @@ extern uint8_t drive_types[32];
 
 const char *drive_command(uint8_t id, const char *command);
 void drive_detect(void);
+struct tm *drive_get_time(uint8_t id);
+bool drive_set_time(uint8_t device, const struct tm *tm);
 const char *drive_identify(uint8_t id);
 uint16_t drive_read(uint8_t id, uint8_t *buffer, uint32_t length);
 uint16_t drive_write (uint8_t file, const uint8_t *data, uint16_t length);

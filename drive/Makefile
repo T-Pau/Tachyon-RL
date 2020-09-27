@@ -6,8 +6,10 @@ CFLAGS = -t c64 -O -g
 SOURCES=\
 	drive-command.c \
 	drive-detect.c \
+	drive-get-time.c \
 	drive-identify.c \
 	drive-read.c \
+	drive-set-time.c \
 	drive-write.c
 
 all: ${LIB}

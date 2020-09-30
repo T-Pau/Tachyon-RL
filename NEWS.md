@@ -1,3 +1,7 @@
+# 1.1
+
+- Add support for backing up to SD2IEC.
+
 # 1.0.1 (2020-09-16)
 
 - Fix "Are you sure?" question on restore.

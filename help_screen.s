@@ -38,11 +38,12 @@ _help_screen:
 L1:
     scrcode "Backup/restore with Ultimate cartridge: "
     scrcode "                                        "
-    scrcode "* Put the Ultimate in the Pass-Thru port"
-    scrcode "  of your RAMLink, and put the lower    "
-    scrcode "  switch to NORMAL (not DIRECT).        "
-    scrcode "* Enable both Command Interface and REU "
-    scrcode "  in F2 -> C64 and Cartridge Settings.  "
+    scrcode "* On the Ultimate in C64 and Cartridge  "
+    scrcode "  Settings disable Alternate Kernal and "
+    scrcode "  enable Command Interface and REU.     "
+    scrcode "* Select NORMAL on the lower switch of  "
+    scrcode "  your RAMLink and put the Ultimate in  "
+    scrcode "  the Pass-Thru port.                   "
     scrcode "* If you have a SuperCPU, turn Turbo on."
     scrcode "* Load and start Tachyon RL.            "
     scrcode "* Select backup or restore.             "
@@ -63,7 +64,6 @@ L1:
     .byte $40, $40, $40, $71, $40, $40, $40, $40, $40, $40
     .byte $40, $40, $40, $40, $40, $71, $40, $40, $40, $40
     .byte $40, $40, $40, $40, $40, $40, $40, $7d, $20, $20
-    scrcode "                                        "
     scrcode "                  (C) 2020 Dillo / T'Pau"
 
     scrcode "Backup/restore with SD2IEC:             "

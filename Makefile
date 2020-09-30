@@ -2,7 +2,7 @@ SUBDIRS = drive ramlink reu ultimate
 
 DISK=Tachyon-RL.d64
 
-VERSION=1.0.1
+VERSION=1.1
 
 CC = cl65
 CFLAGS = -t c64 -O -g

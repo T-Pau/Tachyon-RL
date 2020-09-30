@@ -1,7 +1,6 @@
-- update help screen
-
+- set RTC
 - let user choose backup method
+- verify backup
+- support multiple SD2IEC devices
 - get RAMLink size via G-P<0> command. 
 - handle more IEC errors
-- set RTC
-- verify

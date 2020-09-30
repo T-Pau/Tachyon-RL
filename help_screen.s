@@ -36,16 +36,14 @@ _help_screen:
     .word L1
 
 L1:
-    scrcode "Tachyon RL - Back up RAMLink to Ultimate"
-    scrcode "                                        "
-    scrcode "Tachyon RL uses your 1541 Ultimate or   "
-    scrcode "Ultimate II+ cartridge to back up and   "
-    scrcode "restore your CMD RAMLink.               "
+    scrcode "Backup/restore with Ultimate cartridge: "
     scrcode "                                        "
     scrcode "* Put the Ultimate in the Pass-Thru port"
-    scrcode "  of your RAMLink.                      "
-    scrcode "* Enable both Command Interface and RAM "
-    scrcode "  Expansion Unit (REU) on the Ultimate. "
+    scrcode "  of your RAMLink, and put the lower    "
+    scrcode "  switch to NORMAL (not DIRECT).        "
+    scrcode "* Enable both Command Interface and REU "
+    scrcode "  in F2 -> C64 and Cartridge Settings.  "
+    scrcode "* If you have a SuperCPU, turn Turbo on."
     scrcode "* Load and start Tachyon RL.            "
     scrcode "* Select backup or restore.             "
     scrcode "* Enter the name of your backup file.   "
@@ -54,12 +52,46 @@ L1:
     scrcode "  always works (e. g. /Usb0/backups/rl)."
     scrcode "                                        "
     scrcode "Approximate time for backup or restore: "
-    .byte $70, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $72, $40, $40, $40, $40
-    .byte $40, $40, $40, $40, $40, $40, $40, $72, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $6e, $20
-    scrcode "| RAMLink Size |    C64    | SuperCPU | "
-    scrcode "|     4 MB     | ca. 2 min | ca. 15 s | "
-    scrcode "|    16 MB     | ca. 8 min | ca. 90 s | "
-    .byte $6d, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $71, $40, $40, $40, $40
-    .byte $40, $40, $40, $40, $40, $40, $40, $71, $40, $40, $40, $40, $40, $40, $40, $40, $40, $40, $7d, $20
+    .byte $20, $70, $40, $40, $40, $40, $40, $72, $40, $40
+    .byte $40, $40, $40, $72, $40, $40, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $72, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $6e, $20, $20
+    scrcode " |Size | C64 |SuperCPU V1|SuperCPU V2|  "
+    scrcode " | 4 MB|2 min|    18 s   |    14 s   |  "
+    scrcode " |16 MB|8 min|    75 s   |    55 s   |  "
+    .byte $20, $6d, $40, $40, $40, $40, $40, $71, $40, $40
+    .byte $40, $40, $40, $71, $40, $40, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $71, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $7d, $20, $20
+    scrcode "                                        "
+    scrcode "                  (C) 2020 Dillo / T'Pau"
+
+    scrcode "Backup/restore with SD2IEC:             "
+    scrcode "                                        "
+    scrcode "* Connect your SD2IEC.                  "
+    scrcode "                                        "
+    scrcode "* If you have a SuperCPU, turn Turbo on."
+    scrcode "                                        "
+    scrcode "* Load and start Tachyon RL.            "
+    scrcode "                                        "
+    scrcode "* Select backup or restore.             "
+    scrcode "                                        "
+    scrcode "* Enter the name of your backup file.   "
+    scrcode "                                        "
+    scrcode "                                        "
+    scrcode "                                        "
+    scrcode "Approximate time for backup or restore: "
+    .byte $20, $70, $40, $40, $40, $40, $40, $40, $72, $40
+    .byte $40, $40, $40, $40, $72, $40, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $72, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $40, $6e, $20
+    scrcode " |Size | C64  |SuperCPU V1|SuperCPU V2| "
+    scrcode " | 4 MB|20 min|   15 min  |   15 min  | "
+    scrcode " |16 MB|75 min|   60 min  |   60 min  | "
+    .byte $20, $6d, $40, $40, $40, $40, $40, $40, $71, $40
+    .byte $40, $40, $40, $40, $71, $40, $40, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $71, $40, $40, $40
+    .byte $40, $40, $40, $40, $40, $40, $40, $40, $7d, $20
+    scrcode "                                        "
     scrcode "                                        "
     scrcode "                  (C) 2020 Dillo / T'Pau"

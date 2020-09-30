@@ -32,17 +32,22 @@
 #include <conio.h>
 #include <c64.h>
 
-#define SCREEN ((unsigned char *)0x400)
+#define SCREEN ((unsigned char *)(0x400 + 80))
 
 void help(void) {
+    static const uint8_t *source;
 	static unsigned int i;
-
-	for (i = 0; i < 1000; i++) {
-		SCREEN[i] = help_screen[i];
-        if (i > 40) {
-            COLOR_RAM[i] = COLOR_GRAY3;
+    uint8_t page;
+    
+    for (page = 0; page < 2; ++page) {
+        source = help_screen + page * 23*40;
+        for (i = 0; i < 23*40; i++) {
+            SCREEN[i] = source[i];
+            if (i > 40) {
+                COLOR_RAM[i] = COLOR_GRAY3;
+            }
         }
-	}
 
-	cgetc();
+        cgetc();
+    }
 }

@@ -35,9 +35,6 @@
 bool restore_sd2iec(void) {
     static unsigned long address;
     
-    printf("Not implemented yet.\n");
-    return false;
-    
 #if ENABLE_DOS
     if (cbm_open(1, sd2iec_device, 2, filename) != 0) {
         printf("Can't open file.\n"); /* TODO: error message */
@@ -49,7 +46,7 @@ bool restore_sd2iec(void) {
     printf("Loading RAMLink from disk:   0 of %3u", (unsigned int)(ramlink_size >> 16));
     for (address = 0; address < ramlink_size; address += BUFFER_SIZE) {
         gotox(0);
-        printf("Loading RAMLink from disk: %3u\n", (unsigned int)(address>>16));
+        printf("Loading RAMLink from disk: %3u", (unsigned int)(address>>16));
 #if ENABLE_DOS
         if (drive_read(1, buffer, BUFFER_SIZE) != BUFFER_SIZE) {
             printf("\nRead error."); /* TODO: error detail. */

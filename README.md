@@ -12,7 +12,6 @@ Approximate time for backup or restore for 16 MB RAMLink (proportionally shorter
 | Method | C64 | SuperCPU V1 | SuperCPU V2 |
 |:-:|:-:|:-:|:-:|
 | Ultimate with REU | 8 min | 75 s | 55 s |
-| Ultimate without REU | 17 min | 7 min | 5 min |
 | SD2IEC | 72 min | 64 min | 60 min |
 
 ## Using
@@ -21,7 +20,7 @@ Approximate time for backup or restore for 16 MB RAMLink (proportionally shorter
 
 To back up or restore with an Ultimate cartridge, follow these steps:
 
-- On the Ultimate, press the Menu button, then `F2`, go to `C64 and Cartridge Settings`. Disable `Alternate Kernal` (otherwise Ultimate and RAMLink are incompatible and will freeze). Enable `Command Interface`. and `REU`. A `REU Size` of 16MB is recommended.
+- On the Ultimate, press the Menu button, then `F2`, go to `C64 and Cartridge Settings`. Disable `Alternate Kernal` (otherwise Ultimate and RAMLink are incompatible and will freeze). Enable `Command Interface` and `REU`. A `REU Size` of 16MB is recommended.
 - If you have a SuperCPU, set the `Speed` switch to `Turbo`.
 - Set the lower switch on your RAMLink to `normal` and the upper switch to `enabled`. Connect your Ultimate cartridge to the Pass-Thru port.
 - Connect the RAMLink to your computer and turn it on.

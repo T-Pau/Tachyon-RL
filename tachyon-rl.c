@@ -52,7 +52,7 @@ int main(void) {
         textcolor(COLOR_GRAY3);
         clrscr();
         textcolor(COLOR_WHITE);
-        printf("Tachyon RL " VERSION " - RAMLink Backup\n");
+        printf("Tachyon RL " TACHYON_VERSION " - RAMLink Backup\n");
         textcolor(COLOR_GRAY3);
         
         if (!detect()) {

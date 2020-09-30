@@ -46,8 +46,6 @@
 #define ENABLE_RAMLINK 1
 #define ENABLE_REU 1
 
-#define VERSION "1.1"
-
 enum {
     CPU_C64,
     CPU_C128,

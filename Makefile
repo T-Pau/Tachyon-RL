@@ -5,7 +5,7 @@ DISK=Tachyon-RL.d64
 VERSION=1.1
 
 CC = cl65
-CFLAGS = -t c64 -O -g
+CFLAGS = -t c64 -O -g -DTACHYON_VERSION=\"${VERSION}\"
 
 PROGRAMS=\
 	tachyon-rl.prg

@@ -1,4 +1,4 @@
-# 1.1
+# 1.1 (2020-09-30)
 
 - Add support for backing up to SD2IEC.
 

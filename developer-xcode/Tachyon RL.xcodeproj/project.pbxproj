@@ -9,7 +9,6 @@
 /* Begin PBXFileReference section */
 		4B11AC2A2517AC6F00E9ACFA /* restore-sd2iec.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "restore-sd2iec.c"; sourceTree = "<group>"; };
 		4B11AC2B2517B55E00E9ACFA /* drive-read.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "drive-read.s"; sourceTree = "<group>"; };
-		4B11AC2C2517B73200E9ACFA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4B3345DC250B690500B7A144 /* ultimate_ci_detect.mdoc */ = {isa = PBXFileReference; lastKnownFileType = text; path = ultimate_ci_detect.mdoc; sourceTree = "<group>"; };
 		4B3345DD250B690500B7A144 /* ci-write.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "ci-write.s"; sourceTree = "<group>"; };
 		4B3345DF250B690500B7A144 /* ci-status.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ci-status.c"; sourceTree = "<group>"; };
@@ -107,7 +106,6 @@
 			children = (
 				4B9B7EFF250E2FAC00DD3AFB /* README.md */,
 				4BE318FD251320AB00D92BEF /* NEWS.md */,
-				4B11AC2C2517B73200E9ACFA /* README.md */,
 				4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */,
 				4B33462F250B695E00B7A144 /* src */,
 				4B33465E2514DB1400B7A144 /* drive */,

@@ -39,7 +39,7 @@ To back up or restore with an SD2IEC, follow these steps. Please note, backing u
 - Make sure no disk is mounted in SD2IEC. If it is, use `@CD←` to unmount. (Disk images usually aren't big enough to hold a RAMLink backup.)
 - Load and start `Tachyon RL`.
 - Select backup or restore.
-- Enter the name of your backup file. This is relative to the current directory on your SD2iEC ( `/` by default). A full path always works (e. g. `//backups/rl`).
+- Enter the name of your backup file. This is relative to the current directory on your SD2IEC ( `/` by default). A full path always works (e. g. `//backups/rl`).
 
 ## Building
 

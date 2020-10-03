@@ -88,6 +88,8 @@
 		4B3346682517798C00B7A144 /* print-approximate-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "print-approximate-time.c"; sourceTree = "<group>"; };
 		4B348FFD2518D85F008C7792 /* sd2iec-read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "sd2iec-read.c"; sourceTree = "<group>"; };
 		4B348FFE2520C819008C7792 /* drive-set-time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "drive-set-time.c"; sourceTree = "<group>"; };
+		4B39A6BD2528668800D0312A /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
+		4B39A6BE252866BB00D0312A /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = TODO.md; path = ../TODO.md; sourceTree = "<group>"; };
 		4B9B7EFD250BA36000DD3AFB /* rl-reu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rl-reu.c"; sourceTree = "<group>"; };
 		4B9B7EFE250D2F0900DD3AFB /* read-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "read-test.c"; sourceTree = "<group>"; };
 		4B9B7EFF250E2FAC00DD3AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -105,8 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				4B9B7EFF250E2FAC00DD3AFB /* README.md */,
+				4B39A6BE252866BB00D0312A /* TODO.md */,
 				4BE318FD251320AB00D92BEF /* NEWS.md */,
 				4B9B7F00250E2FB900DD3AFB /* LICENSE.txt */,
+				4B39A6BD2528668800D0312A /* Makefile */,
 				4B33462F250B695E00B7A144 /* src */,
 				4B33465E2514DB1400B7A144 /* drive */,
 				4B33461A250B690500B7A144 /* ramlink */,
@@ -231,7 +235,7 @@
 				4B33463F250B6CD500B7A144 /* write-test.c */,
 			);
 			name = src;
-			path = ..;
+			path = ../src;
 			sourceTree = "<group>";
 		};
 		4B33465E2514DB1400B7A144 /* drive */ = {

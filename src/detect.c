@@ -73,7 +73,6 @@ bool detect(void) {
     for (i = 8; i < 32; ++i) {
         if (drive_types[i] == DRIVE_TYPE_RAMLINK) {
             ramlink_device = i;
-            break;
         }
         else if (drive_types[i] == DRIVE_TYPE_SD2IEC) {
             sd2iec_device = i;

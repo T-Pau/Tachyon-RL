@@ -31,6 +31,7 @@
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
+#include <time.h>
 
 #include "tachyon.h"
 #include "timer.h"
@@ -44,6 +45,9 @@ int main(void) {
 	const char *string;
 	unsigned int ret;
     uint8_t speed_index;
+    struct tm *rl_tm, *dos_tm;
+    time_t rl_time = 0;
+    time_t dos_time = 0;
 
     while (1) {
         bgcolor(COLOR_BLACK);
@@ -61,6 +65,47 @@ int main(void) {
         
         clear_lines(top_line, 25);
         gotoxy(0, top_line);
+        
+#if 0
+        rl_tm = drive_get_time(ramlink_device);
+        if (dos) {
+            dos_tm = ultimate_dos_get_time();
+        }
+        else if (sd2iec_device > 0) {
+            dos_tm = drive_get_time(sd2iec_device);
+        }
+        if (rl_tm != NULL && dos_tm != NULL) {
+            rl_time = mktime(rl_tm);
+        }
+        else {
+            rl_time = 0;
+        }
+        if (dos_tm != NULL) {
+            dos_time = mktime(dos_tm);
+        }
+        else {
+            dos_time = 0;
+        }
+        if (dos_tm != NULL && (dos_time > rl_time + 30*60 || dos_time < rl_time - 30*60)) {
+            printf("RAMLink time:  ");
+            if (rl_tm == 0) {
+                textcolor(COLOR_RED);
+                printf("not set");
+            }
+            else {
+                textcolor(COLOR_YELLOW);
+                printf("%s", asctime(rl_tm));
+            }
+            textcolor(COLOR_GRAY3);
+            if (dos) {
+                printf("Ultimate time: ");
+            }
+            else {
+                printf("SD2IEC time:   ");
+            }
+            printf("%s\n", asctime(dos_tm));
+        }
+#endif
         
         switch (method) {
         case METHOD_ULTIMATE:

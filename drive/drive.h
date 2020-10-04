@@ -51,6 +51,9 @@
 
 extern uint8_t drive_types[32];
 
+extern uint8_t drive_response[256];
+extern uint8_t drive_response_length;
+
 const char *drive_command(uint8_t id, const char *command);
 void drive_detect(void);
 struct tm *drive_get_time(uint8_t id);

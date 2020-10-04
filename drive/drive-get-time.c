@@ -36,37 +36,27 @@ struct tm *drive_get_time(uint8_t device) {
     static struct tm tm;
     static uint8_t i;
 
-    if (cbm_open(15, device, 15, "t-rd\r") != 0) {
-        i = _oserror;
-        cbm_close(15);
-        _oserror = i;
-        return NULL;
-    }
-    
-    if ((i = cbm_k_chkin(15)) != 0) {
-        cbm_close(15);
-        _oserror = i;
+    if (drive_command(device, "tr-d") == NULL) {
         return NULL;
     }
 
-    tm.tm_wday = cbm_k_basin();
-    tm.tm_year = cbm_k_basin();
+    if (drive_response_length != 9 || drive_response[0] >= 7 || drive_response[2] >= 12) {
+        return NULL;
+    }
+    
+    tm.tm_wday = drive_response[0];
+    tm.tm_year = drive_response[1];
     if (tm.tm_year < 70) {
         tm.tm_year += 100;
     }
-    tm.tm_mon = cbm_k_basin() - 1;
-    tm.tm_mday = cbm_k_basin();
-    tm.tm_hour = cbm_k_basin();
-    tm.tm_min = cbm_k_basin();
-    tm.tm_sec = cbm_k_basin();
-    if (cbm_k_basin()) {
+    tm.tm_mon = drive_response[2] - 1;
+    tm.tm_mday = drive_response[3];
+    tm.tm_hour = drive_response[4];
+    tm.tm_min = drive_response[5];
+    tm.tm_sec = drive_response[6];
+    if (drive_response[7]) {
         tm.tm_hour += 12;
     }
     
-    /* TODO: handle error */
-    
-    cbm_k_clrch();
-    cbm_k_close(15);
-
     return &tm;
 }

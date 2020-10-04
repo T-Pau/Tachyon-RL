@@ -62,7 +62,7 @@ enum {
 
 extern bool dos;
 extern uint32_t ramlink_size;
-extern uint8_t ramsize_device;
+extern uint8_t ramlink_device;
 extern uint32_t reu_size;
 extern uint8_t sd2iec_device;
 extern uint8_t method;
